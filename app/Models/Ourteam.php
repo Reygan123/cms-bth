@@ -14,7 +14,7 @@ class Ourteam extends Model
      * @var array
      */
     protected $fillable = [
-        'ot_id','title','name', 'fb','ig','tt','phone','email','image'
+        'ot_id','title', 'program_id','name', 'fb','ig','tt','phone','email','image'
     ];
 
    /**

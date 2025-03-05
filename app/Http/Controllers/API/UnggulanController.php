@@ -15,7 +15,7 @@ class UnggulanController extends Controller
      */
     public function index()
     {
-        return response()->json(Unggulan::all(), 200);
+        return response()->json(Unggulan::where('home', 1)->get(), 200);
     }
 
     /**
@@ -35,9 +35,9 @@ class UnggulanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return response()->json(Unggulan::where('home', 1)->get(), 200);
     }
 
     /**

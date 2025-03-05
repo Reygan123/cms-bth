@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ourteam;
+use App\Models\Program;
 use App\Models\Ourteamopening;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -35,7 +36,8 @@ class OurteamController extends Controller
      */
     public function create()
     {
-        return view('admin.ourteam.create');
+        $programs = Program::latest()->get();
+        return view('admin.ourteam.create', compact('programs'));
     }
 
     /**
@@ -58,6 +60,7 @@ class OurteamController extends Controller
 
         $ourteam = Ourteam::create([
             'title'             => $request->title,
+            'program_id'        => $request->program_id,
             'slug'              => Str::slug($request->title, '-'),
             'name'              => $request->name,
             'ot_id'              => $request->ot_id,
@@ -87,7 +90,8 @@ class OurteamController extends Controller
      */
     public function edit(Ourteam $ourteam)
     {
-        return view('admin.ourteam.edit', compact('ourteam'));
+        $programs = Program::latest()->get();
+        return view('admin.ourteam.edit', compact('ourteam', 'programs'));
     }
 
     /**
@@ -112,6 +116,7 @@ class OurteamController extends Controller
             $ourteam = Ourteam::findOrFail($ourteam->id);
             $ourteam->update([
                 'title'             => $request->title,
+                'program_id'        => $request->program_id,
                 'slug'              => Str::slug($request->title, '-'),
                 'name'              => $request->name,
                 'ot_id'              => $request->ot_id,
@@ -134,6 +139,7 @@ class OurteamController extends Controller
             $ourteam = Ourteam::findOrFail($ourteam->id);
             $ourteam->update([
                 'title'             => $request->title,
+                'program_id'        => $request->program_id,
                 'slug'              => Str::slug($request->title, '-'),
                 'name'              => $request->name,
                 'ot_id'              => $request->ot_id,

@@ -38,7 +38,7 @@
                                             <div class="row">
                                                 <div class="col-sm-8">
                                                     <div class="form-group mb-4">
-                                                        <label class="text-label" for="name">Name</label>
+                                                        <label class="text-label" for="name">Program Studi</label>
                                                         <input class="form-control" type="text" name="name"
                                                             value="{{ old('name', $program->name) }}"
                                                             placeholder="Name of Program">
@@ -53,7 +53,7 @@
                                                     </div>
                                                     <!-- Tambahkan Checkbox untuk Memilih Fasilitas -->
                                                     <div class="form-group mb-4">
-                                                        <label class="text-label">Assessment</label>
+                                                        <label class="text-label">Fakultas</label>
                                                         <div class="row">
                                                             @foreach ($facilities as $facility)
                                                             <div class="col-sm-6">
@@ -80,7 +80,7 @@
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <div class="form-group mb-4">
-                                                                <label class="text-label" for="age">Age Group</label>
+                                                                <label class="text-label" for="age">Mahasiswa</label>
                                                                 <input class="form-control" type="text" name="age"
                                                                     value="{{ old('age', $program->age) }}"
                                                                     placeholder="Student age range">
@@ -97,8 +97,7 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group mb-4">
-                                                                <label class="text-label" for="weekly">Weekly
-                                                                    Meets</label>
+                                                                <label class="text-label" for="weekly">Lulusan</label>
                                                                 <input class="form-control" type="text" name="weekly"
                                                                     value="{{ old('weekly', $program->weekly) }}"
                                                                     placeholder="Number of weekly meets">
@@ -116,8 +115,7 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group mb-4">
-                                                                <label class="text-label" for="periode">Meeting
-                                                                    Duration</label>
+                                                                <label class="text-label" for="periode">Karya</label>
                                                                 <input class="form-control" type="text" name="periode"
                                                                     value="{{ old('periode', $program->periode) }}"
                                                                     placeholder="Meeting duration in a day ">
@@ -135,8 +133,7 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group mb-4">
-                                                                <label class="text-label" for="class_size">Class
-                                                                    Size</label>
+                                                                <label class="text-label" for="class_size">Prestasi</label>
                                                                 <input class="form-control" type="text"
                                                                     name="class_size"
                                                                     value="{{ old('class_size', $program->class_size) }}"
@@ -154,7 +151,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group mb-4">
-                                                        <label class="text-label" for="title1">Title Section 1</label>
+                                                        <label class="text-label" for="title1">Headline</label>
                                                         <input class="form-control" type="text" name="title1"
                                                             value="{{ old('title1', $program->title1) }}"
                                                             placeholder="Title Section 1">
@@ -168,7 +165,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="form-group mb-4">
-                                                        <label class="text-label" for="description1">Description Section
+                                                        <label class="text-label" for="description1">Sub Headline
                                                             1</label>
                                                         <textarea id="editor1" name="description1">{{ old('description1', $program->description1) }}</textarea>
                                                         @error('description1')

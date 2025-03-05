@@ -133,9 +133,9 @@
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-widgets"></i><span
                         class="nav-text">Services</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('admin.program.index') }}">Programs</a></li>
+                    <li><a href="{{ route('admin.program.index') }}">Program Studi</a></li>
                     <li><a href="{{ route('admin.unggulan.index') }}">Features</a></li>
-                    <li><a href="{{ route('admin.facility.index') }}">Assessments</a></li>
+                    <li><a href="{{ route('admin.facility.index') }}">Fakultas</a></li>
                     <li><a href="{{ route('admin.pricing.index') }}">Pricing</a></li>
                     <li><a href="{{ route('admin.benefit.index') }}">Benefits</a></li>
                     <li><a href="{{ route('admin.testimony.index') }}">Testimonies</a></li>

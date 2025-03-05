@@ -14,16 +14,16 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group mb-4">
-                                        <label class="text-label" for="ot_id">Our Team's Category</label>
-                                        <select class="form-control" name="ot_id" id="ot_id">
-                                            <option class="py-1" value="">-- Select Category --</option>
-                                            <option class="py-1" value="1" {{ $ourteam->ot_id == 1 ? 'selected' : '' }}>Dewan Penasehat</option>
-                                            <option class="py-1" value="2" {{ $ourteam->ot_id == 2 ? 'selected' : '' }}>Dewan Direksi</option>
-                                            <option class="py-1" value="3" {{ $ourteam->ot_id == 3 ? 'selected' : '' }}>Psychologist </option>
-                                            <option class="py-1" value="4" {{ $ourteam->ot_id == 4 ? 'selected' : '' }}>Counselor</option>
-                                            <option class="py-1" value="5" {{ $ourteam->ot_id == 5 ? 'selected' : '' }}>Peer Counselor</option>
+                                        <label class="text-label" for="program_id">Program Name</label>
+                                        <select class="form-control" name="program_id">
+                                            @foreach ($programs as $program)
+                                                <option class="py-1" value="{{ $program->id }}"
+                                                    @if ($ourteam->program_id == $program->id) selected @endif>
+                                                    {{ $program->name }}
+                                                </option>
+                                            @endforeach
                                         </select>
-                                        @error('ot_id')
+                                        @error('program_id')
                                             <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
                                                 <div class="px-4 py-2">
                                                     <p class="text-gray-600 text-sm">{{ $message }}</p>
