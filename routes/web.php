@@ -177,6 +177,9 @@ Route::prefix('admin')->group(function () {
         Route::resource('/benefit', BenefitController::class, ['as' => 'admin']);
         Route::get('/admin/titlebenefit/{titlebenefit}/delete-image/{image}', [TitlebenefitController::class, 'deleteImage'])->name('admin.titlebenefit.deleteImage');
         Route::resource('/titlebenefit', TitlebenefitController::class, ['as' => 'admin']);
+        
+        //route resource organosasi
+        Route::resource('/organisasi', OrganisasiController::class, ['as' => 'admin']);
 
 
         //route resource story

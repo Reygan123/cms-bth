@@ -134,10 +134,12 @@
                         class="nav-text">Services</span></a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('admin.program.index') }}">Program Studi</a></li>
-                    <li><a href="{{ route('admin.unggulan.index') }}">Features</a></li>
-                    <li><a href="{{ route('admin.facility.index') }}">Fakultas</a></li>
+                    <li><a href="{{ route('admin.unggulan.index') }}">Kelebihan atau Unggulan</a></li>
+                    <li><a href="{{ route('admin.facility.index') }}">Fasilitas</a></li>
+                    <li><a href="{{ route('admin.prestasi.index') }}">Prestasi</a></li>
                     <li><a href="{{ route('admin.pricing.index') }}">Pricing</a></li>
                     <li><a href="{{ route('admin.benefit.index') }}">Benefits</a></li>
+                    <li><a href="{{ route('admin.organisasi.index') }}">Organisasi</a></li>
                     <li><a href="{{ route('admin.testimony.index') }}">Testimonies</a></li>
                     <li><a href="{{ route('admin.portofolio.index') }}">Portofolio</a></li>
                     <li><a href="{{ route('admin.dukungan.index') }}">Supports</a></li>

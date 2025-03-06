@@ -9,6 +9,20 @@
                         <h5 class="text-right">Create</h5>
                         <form action="{{ route('admin.facility.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            <div class="form-group mb-4">
+                                <div class="form-group">
+                                    <input type="checkbox" name="home" id="home" value="1" {{ old('home') ? 'checked' : '' }}>
+                                    <label for="home" class="ml-2">Display on Home</label>
+
+                                </div>
+                                @error('home')
+                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                        <div class="px-4 py-2">
+                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                        </div>
+                                    </div>
+                                @enderror
+                            </div>
                             <div class="row">
                                 <div class="col-12">
 

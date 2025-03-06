@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Agenda;
+
 
 class BeritaController extends Controller
 {
@@ -16,6 +18,11 @@ class BeritaController extends Controller
     public function index()
     {
         return response()->json(Post::all(), 200);
+    }
+    
+    public function indexAgenda()
+    {
+        return response()->json(Agenda::orderBy('created_at', 'desc')->take(3)->get(), 200);
     }
 
     /**

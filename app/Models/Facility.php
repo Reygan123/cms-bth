@@ -19,7 +19,8 @@ class Facility extends Model
         'slug',
         'subtitle',
         'description',
-        'image'
+        'image',
+        'home',
     ];
 
     /**

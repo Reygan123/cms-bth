@@ -17,7 +17,21 @@ class Agenda extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'slug','agendacat', 'start_date', 'end_date', 'start_time', 'end_time', 'content','location','yt_link','image','user_id','organizer','register_link','contact'
+        'title',
+        'slug',
+        'agendacat',
+        'start_date',
+        'end_date',
+        'start_time',
+        'end_time',
+        'content',
+        'location',
+        'yt_link',
+        'image',
+        'user_id',
+        'organizer',
+        'register_link',
+        'contact'
     ];
 
 
@@ -26,11 +40,10 @@ class Agenda extends Model
      *
      * @return Attribute
      */
-    protected function start_date(): Attribute
+    // Accessor untuk start_date
+    public function getStartDateAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('d-M-Y'),
-        );
+        return Carbon::parse($value)->format('d-M-Y');
     }
 
     /**
@@ -38,11 +51,10 @@ class Agenda extends Model
      *
      * @return Attribute
      */
-    protected function end_date(): Attribute
+    // Accessor untuk end_date
+    public function getEndDateAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('d-M-Y'),
-        );
+        return Carbon::parse($value)->format('d-M-Y');
     }
 
     /**
@@ -50,11 +62,10 @@ class Agenda extends Model
      *
      * @return Attribute
      */
-    protected function start_time(): Attribute
+    // Accessor untuk start_time
+    public function getStartTimeAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('h:i:s'),
-        );
+        return Carbon::parse($value)->format('H:i:s');
     }
 
     /**
@@ -62,10 +73,9 @@ class Agenda extends Model
      *
      * @return Attribute
      */
-    protected function end_time(): Attribute
+    // Accessor untuk end_time
+    public function getEndTimeAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('h:i:s'),
-        );
+        return Carbon::parse($value)->format('H:i:s');
     }
 }

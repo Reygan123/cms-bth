@@ -17,14 +17,14 @@ class FacilityController extends Controller
      */
     public function index()
     {
-        $facilities = Facility::oldest()->when(request()->q, function($facilities) {
-            $facilities = $facilities->where('name', 'like', '%'. request()->q . '%');
+        $facilities = Facility::oldest()->when(request()->q, function ($facilities) {
+            $facilities = $facilities->where('name', 'like', '%' . request()->q . '%');
         })->paginate(20);
 
         return view('admin.facility.index', compact('facilities'));
     }
 
-   
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,12 +47,12 @@ class FacilityController extends Controller
         $this->validate($request, [
             'image'             => 'required|image|mimes:jpeg,jpg,png,webp|max:1000',
             'title'             => 'required',
-        ]); 
- 
+        ]);
+
         //upload image
         $image = $request->file('image');
         $image->storeAs('public/facilities', $image->hashName());
- 
+
         //save to DB
         $facility = Facility::create([
             'image'             => $image->hashName(),
@@ -60,15 +60,16 @@ class FacilityController extends Controller
             'slug'              => Str::slug($request->title, '-'),
             'subtitle'           => $request->subtitle,
             'description'           => $request->description,
+            'home'                => $request->home,
         ]);
- 
-        if($facility){
-             //redirect dengan pesan sukses
-             return redirect()->route('admin.facility.index')->with(['success' => 'Data Berhasil Disimpan!']);
-         }else{
-             //redirect dengan pesan error
-             return redirect()->route('admin.facility.index')->with(['error' => 'Data Gagal Disimpan!']);
-         }
+
+        if ($facility) {
+            //redirect dengan pesan sukses
+            return redirect()->route('admin.facility.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('admin.facility.index')->with(['error' => 'Data Gagal Disimpan!']);
+        }
     }
 
 
@@ -95,11 +96,11 @@ class FacilityController extends Controller
         $this->validate($request, [
             'title'         => 'required',
             'image' => 'image|mimes:jpeg,jpg,png,webp|max:1000',
-        ]); 
+        ]);
 
         //check jika image kosong
-        if($request->file('image') == '') {
-            
+        if ($request->file('image') == '') {
+
             //update data tanpa image
             $facility = Facility::findOrFail($facility->id);
             $facility->update([
@@ -107,12 +108,12 @@ class FacilityController extends Controller
                 'slug'                  => Str::slug($request->title, '-'),
                 'subtitle'           => $request->subtitle,
                 'description'           => $request->description,
+                'home'                => $request->home,
             ]);
-
         } else {
 
             //hapus image lama
-            Storage::disk('local')->delete('public/facilities/'.basename($facility->image));
+            Storage::disk('local')->delete('public/facilities/' . basename($facility->image));
 
             //upload image baru
             $image = $request->file('image');
@@ -126,13 +127,14 @@ class FacilityController extends Controller
                 'slug'              => Str::slug($request->title, '-'),
                 'subtitle'           => $request->subtitle,
                 'description'           => $request->description,
+                'home'                => $request->home,
             ]);
         }
 
-        if($facility){
+        if ($facility) {
             //redirect dengan pesan sukses
             return redirect()->route('admin.facility.index')->with(['success' => 'Data Berhasil Diupdate!']);
-        }else{
+        } else {
             //redirect dengan pesan error
             return redirect()->route('admin.facility.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
@@ -147,14 +149,14 @@ class FacilityController extends Controller
     public function destroy($id)
     {
         $facility = Facility::findOrFail($id);
-        Storage::disk('local')->delete('public/facilities/'.basename($facility->image));
+        Storage::disk('local')->delete('public/facilities/' . basename($facility->image));
         $facility->delete();
 
-        if($facility){
+        if ($facility) {
             return response()->json([
                 'status' => 'success'
             ]);
-        }else{
+        } else {
             return response()->json([
                 'status' => 'error'
             ]);
