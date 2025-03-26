@@ -45,21 +45,21 @@ class UnggulanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'image'             => 'required|image|mimes:jpeg,jpg,png,webp|max:1000',
+            // 'image'             => 'required|image|mimes:jpeg,jpg,png,webp|max:1000',
             'title'             => 'required',
             'description'       => 'required',
         ]);
 
         //upload image
-        $image = $request->file('image');
-        $image->storeAs('public/unggulans', $image->hashName());
+        // $image = $request->file('image');
+        // $image->storeAs('public/unggulans', $image->hashName());
 
         $unggulan = Unggulan::create([
             'title'             => $request->title,
             'slug'              => Str::slug($request->title, '-'),
             'description'       => $request->description,
             'link'              => $request->link,
-            'image'             => $image->hashName(),
+            // 'image'             => $image->hashName(),
             'program_id'                => $request->program_id,
             'home'                => $request->home,
         ]);

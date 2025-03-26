@@ -7,33 +7,9 @@ use App\Models\Welcomechat;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/salaam', function () {
+Route::get('/', function () {
     return view('auth.login');
 });
-// Route::middleware('document')->group(function () {
-
-Route::get('/', [\App\Http\Controllers\HomeController::class,'index']) ->name('home');
-Route::resource('/post', \App\Http\Controllers\FpostController::class,['as' => 'post']);
-Route::resource('/agenda', \App\Http\Controllers\FagendaController::class,['as' => 'agenda']);
-Route::resource('/contact', \App\Http\Controllers\FcontactController::class,['as' => 'front']);
-Route::get('/testimony', [\App\Http\Controllers\FtestimonyController::class,'index']) ->name('testimony');
-Route::get('/prosedur', [\App\Http\Controllers\ProsedurController::class, 'index'])->name('prosedur');
-Route::get('/maps',[\App\Http\Controllers\MapsController::class, 'index'])->name('maps');
-Route::get('/investasi',[\App\Http\Controllers\InvestasiController::class, 'index'])->name('investasi');
-Route::resource('/about-us',  \App\Http\Controllers\AboutController::class,['as' => 'front']);
-Route::resource('/ourteam',  \App\Http\Controllers\OurteamController::class,['as' => 'front']);
-Route::resource('/benefit',  \App\Http\Controllers\FbenefitController::class,['as' => 'front']);
-Route::resource('/member', \App\Http\Controllers\MemberController::class, ['as' => 'front']);
-Route::resource('/unggulan', \App\Http\Controllers\FunggulanController::class, ['as' => 'front']);
-Route::resource('/sejarah', \App\Http\Controllers\FsejarahController::class, ['as' => 'front']);
-Route::resource('/our-legal', \App\Http\Controllers\FlegalController::class, ['as' => 'front']);
-Route::resource('/program', \App\Http\Controllers\FprogramController::class, ['as' => 'front']);
-Route::resource('/assessment', \App\Http\Controllers\FfacilityController::class, ['as' => 'front']);
-Route::resource('/portofolio', \App\Http\Controllers\PortofolioController::class, ['as' => 'front']);
-Route::get('/investasi', [\App\Http\Controllers\InvestasiController::class, 'index'])->name('investasi');
-Route::get('/karir',[\App\Http\Controllers\KarirController::class,'index'])->name('karir');
-Route::get('/faq', [\App\Http\Controllers\FaqController::class, 'index'])->name('faq');
-// });
 
 
 /**
@@ -143,6 +119,29 @@ Route::prefix('admin')->group(function () {
         Route::delete('admin/program/massDestroy', [ProgramController::class, 'massDestroy'])->name('admin.program.massDestroy');
         Route::delete('/admin/programs/{program}/deleteImage/{image}', [ProgramController::class, 'deleteImage'])->name('admin.programs.deleteImage');
 
+        //route resource fakultas
+        Route::resource('/fakultas', FakultasController::class, ['as' => 'admin']);
+
+        Route::prefix('fakultas')->group(function () {
+            Route::get('/create/halaman-pertama', [FakultasController::class, 'getHalamanPertama'])->name('admin.fakultas.create.halaman-pertama');
+            Route::post('/create/halaman-pertama', [FakultasController::class, 'postHalamanPertama']);
+
+            Route::get('/create/halaman-kedua', [FakultasController::class, 'getHalamanKedua'])->name('admin.fakultas.create.halaman-kedua');
+            Route::post('/create/halaman-kedua', [FakultasController::class, 'postHalamanKedua']);
+
+            Route::get('/create/halaman-ketiga', [FakultasController::class, 'getHalamanKetiga'])->name('admin.fakultas.create.halaman-ketiga');
+            Route::post('/create/halaman-ketiga', [FakultasController::class, 'postHalamanKetiga']);
+
+            Route::get('/{fakultas}/edit/halaman-pertama', [FakultasController::class, 'getEditHalamanPertama'])->name('admin.fakultas.edit.halaman-pertama');
+            Route::put('/{fakultas}/edit/halaman-pertama', [FakultasController::class, 'updateHalamanPertama']);
+
+            Route::get('/{fakultas}/edit/halaman-kedua', [FakultasController::class, 'getEditHalamanKedua'])->name('admin.fakultas.edit_halaman-kedua');
+            Route::put('/{fakultas}/edit/halaman-kedua', [FakultasController::class, 'updateHalamanKedua']);
+
+            Route::get('/{fakultas}/edit/halaman-ketiga', [FakultasController::class, 'getEditHalamanKetiga'])->name('admin.fakultas.edit.halaman-ketiga');
+            Route::put('/{fakultas}/edit/halaman-ketiga', [FakultasController::class, 'updateHalamanKetiga']);
+        });
+        Route::delete('admin/fakultas/massDestroy', [FakultasController::class, 'massDestroy'])->name('admin.fakultas.massDestroy');
 
         //route resource Ourteam
         Route::resource('/ourteam', OurteamController::class, ['as' => 'admin']);
@@ -218,6 +217,14 @@ Route::prefix('admin')->group(function () {
         //route resource FAQ
         Route::resource('/faq', FaqController::class, ['as' => 'admin']);
         Route::delete('admin/faq/massDestroy', [FaqController::class, 'massDestroy'])->name('admin.faq.massDestroy');
+        
+        //route resource registration
+        Route::resource('/registration', RegistrationController::class, ['as' => 'admin']);
+        Route::delete('admin/registration/massDestroy', [RegistrationController::class, 'massDestroy'])->name('admin.registration.massDestroy');
+        
+        //route resource Kategori FAQ
+        Route::resource('/kategori_faq', KategoriFaqController::class, ['as' => 'admin']);
+        Route::delete('admin/kategori_faq/massDestroy', [KategoriFaqController::class, 'massDestroy'])->name('admin.kategori_faq.massDestroy');
 
 
 

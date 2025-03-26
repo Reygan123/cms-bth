@@ -48,7 +48,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-4">
-                                                    <label class="text-label" for="title2">Title Section 2</label>
+                                                    <label class="text-label" for="title2">Title Visi Misi</label>
                                                     <input class="form-control" type="text" name="title2" value="{{ old('title2') }}" placeholder="Title Section 2">
                                                     @error('title2')
                                                     <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
@@ -59,7 +59,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-4">
-                                                    <label class="text-label" for="description2">Description Section 2</label>
+                                                    <label class="text-label" for="description2">Description Visi Misi</label>
                                                     <textarea id="editor1" name="description2">{{ old('description2') }}</textarea>
                                                     @error('description2')
                                                     <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">

@@ -38,7 +38,7 @@
                                                 </div>
                                                 <!-- Tambahkan Checkbox untuk Memilih Fasilitas -->
                                                 <div class="form-group mb-4">
-                                                    <label class="text-label">Assessment</label>
+                                                    <label class="text-label">Fasilitas</label>
                                                     <div class="row">
                                                         @foreach($facilities as $facility)
                                                         <div class="col-md-6">
@@ -64,7 +64,7 @@
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group mb-4">
-                                                            <label class="text-label" for="age">Age Group (y.o)</label>
+                                                            <label class="text-label" for="age">Mahasiswa</label>
                                                             <input class="form-control" type="text" name="age" value="{{ old('age') }}" placeholder="Student age range">
                                                             @error('age')
                                                             <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
@@ -77,8 +77,8 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group mb-4">
-                                                            <label class="text-label" for="weekly">Weekly Meets</label>
-                                                            <input class="form-control" type="text" name="weekly" value="{{ old('weekly') }}" placeholder="Number of weekly meets">
+                                                            <label class="text-label" for="weekly">Lulusan</label>
+                                                            <input class="form-control" type="text" name="weekly" value="{{ old('weekly') }}" placeholder="Lulusan">
                                                             @error('weekly')
                                                             <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
                                                                 <div class="px-4 py-2">
@@ -90,7 +90,7 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group mb-4">
-                                                            <label class="text-label" for="periode">Meeting Duration</label>
+                                                            <label class="text-label" for="periode">Karya Ilmiah</label>
                                                             <input class="form-control" type="text" name="periode" value="{{ old('periode') }}" placeholder="Meeting duration in a day ">
                                                             @error('periode')
                                                             <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
@@ -103,7 +103,7 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group mb-4">
-                                                            <label class="text-label" for="class_size">Class Size</label>
+                                                            <label class="text-label" for="class_size">Prestasi</label>
                                                             <input class="form-control" type="text" name="class_size" value="{{ old('class_size') }}" placeholder="Number of student in a class">
                                                             @error('class_size')
                                                             <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
@@ -116,7 +116,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group mb-4">
-                                                    <label class="text-label" for="title1">Title Section 1</label>
+                                                    <label class="text-label" for="title1">Headline</label>
                                                     <input class="form-control" type="text" name="title1" value="{{ old('title1') }}" placeholder="Title Section 1">
                                                     @error('title1')
                                                     <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
@@ -127,7 +127,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-4">
-                                                    <label class="text-label" for="description1">Description Section 1</label>
+                                                    <label class="text-label" for="description1">Sub Headline</label>
                                                     <textarea id="editor1" name="description1">{{ old('description1') }}</textarea>
                                                     @error('description1')
                                                     <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">

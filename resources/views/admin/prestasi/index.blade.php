@@ -74,6 +74,11 @@
                                 <button id="delete-selected" class="btn btn-danger btn-rounded mx-4">
                                     Delete Selected <span class="btn-icon-right"><i class="fa-solid fa-trash-can"></i></span>
                                 </button>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-center">
+                                        {{ $prestasis->links() }}
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>

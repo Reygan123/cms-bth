@@ -133,15 +133,17 @@
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-widgets"></i><span
                         class="nav-text">Services</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('admin.program.index') }}">Program Studi</a></li>
-                    <li><a href="{{ route('admin.unggulan.index') }}">Kelebihan atau Unggulan</a></li>
-                    <li><a href="{{ route('admin.facility.index') }}">Fasilitas</a></li>
-                    <li><a href="{{ route('admin.prestasi.index') }}">Prestasi</a></li>
-                    <li><a href="{{ route('admin.pricing.index') }}">Pricing</a></li>
-                    <li><a href="{{ route('admin.benefit.index') }}">Benefits</a></li>
-                    <li><a href="{{ route('admin.organisasi.index') }}">Organisasi</a></li>
+                    <li><a href="{{ route('admin.fakultas.index') }}">Faculties</a></li>
+                    <li><a href="{{ route('admin.program.index') }}">Departements</a></li>
+                    <li><a href="{{ route('admin.registration.index') }}">Registrations</a></li>
+                    <li><a href="{{ route('admin.unggulan.index') }}">USP</a></li>
+                    <li><a href="{{ route('admin.facility.index') }}">Facilities</a></li>
+                    <li><a href="{{ route('admin.prestasi.index') }}">Achivments</a></li>
+                    {{-- <li><a href="{{ route('admin.pricing.index') }}">Pricing</a></li> --}}
+                    {{-- <li><a href="{{ route('admin.benefit.index') }}">Benefits</a></li> --}}
+                    <li><a href="{{ route('admin.organisasi.index') }}">Student Activties</a></li>
                     <li><a href="{{ route('admin.testimony.index') }}">Testimonies</a></li>
-                    <li><a href="{{ route('admin.portofolio.index') }}">Portofolio</a></li>
+                    <li><a href="{{ route('admin.portofolio.index') }}">Portofolios</a></li>
                     <li><a href="{{ route('admin.dukungan.index') }}">Supports</a></li>
                     <li><a href="{{ route('admin.faq.index') }}">FAQs</a></li>
                 </ul>

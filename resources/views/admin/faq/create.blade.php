@@ -12,6 +12,22 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group mb-4">
+                                        <label class="text-label" for="kategorifaqs">Kategories Faqs</label>
+                                        <select class="form-control" name="id_kategori">
+                                            @foreach ($kategorifaqs as $kategorifaq)
+                                                <option class="py-1" value="{{ $kategorifaq->id }}">
+                                                    {{ $kategorifaq->title }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('kategorifaqs')
+                                            <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                <div class="px-4 py-2">
+                                                    <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                </div>
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group mb-4">
                                         <label class="text-label" for="title">Question</label>
                                         <input class="form-control" type="text" name="title"
                                             value="{{ old('title') }}" placeholder="Question">

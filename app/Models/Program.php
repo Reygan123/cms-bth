@@ -115,4 +115,9 @@ class Program extends Model
     {
         return $this->belongsToMany(Pricing::class);
     }
+
+    public function registrations()
+    {
+        return $this->belongsToMany(Registration::class, 'registration_programs');
+    }
 }

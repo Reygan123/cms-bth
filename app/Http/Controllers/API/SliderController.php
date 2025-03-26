@@ -5,6 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Slider;
+use App\Models\Pixel;
+use App\Models\Ganalytics;
+use App\Models\Welcomechat;
 
 class SliderController extends Controller
 {
@@ -16,6 +19,24 @@ class SliderController extends Controller
     public function index()
     {
         return response()->json(Slider::all(), 200);
+    }
+    
+    public function indexPixel()
+    {
+        $pixels = Pixel::oldest()->take(1)->get();
+        return response()->json($pixels, 200);
+    }
+    
+    public function indexAnalytics()
+    {
+        $ganalytics = Ganalytics::oldest()->take(1)->get();
+        return response()->json($ganalytics, 200);
+    }
+    
+    public function indexChat()
+    {
+        $chat = Welcomechat::oldest()->take(1)->get();
+        return response()->json($chat, 200);
     }
 
     /**

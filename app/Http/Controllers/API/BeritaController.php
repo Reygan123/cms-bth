@@ -42,9 +42,9 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        return response()->json(Post::where('slug', $slug)->first(), 200);
     }
 
     /**

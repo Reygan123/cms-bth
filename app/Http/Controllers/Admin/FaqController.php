@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Faq;
+use App\Models\KategoriFaq;
 
 class FaqController extends Controller
 {
@@ -18,19 +19,21 @@ class FaqController extends Controller
 
     public function create()
     {
-        return view('admin.faq.create');
+        $kategorifaqs = KategoriFaq::latest()->get();
+        return view('admin.faq.create', compact('kategorifaqs'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'title'  => 'required',
-            'description'  => 'required'
+            'description'  => 'required',
+            'id_kategori'  => 'required'
         ]);
         $faq = Faq::create([
             'title'             => $request->title,
             'description'       => $request->description,
-
+            'id_kategori'       => $request->id_kategori,
         ]);
  
         if($faq){
@@ -43,7 +46,8 @@ class FaqController extends Controller
     }
     public function edit(Faq $faq)
      {
-         return view('admin.faq.edit', compact('faq'));
+        $kategorifaqs = KategoriFaq::latest()->get();
+         return view('admin.faq.edit', compact('faq', 'kategorifaqs'));
      }
     
     public function update(Request $request, $id)
@@ -51,6 +55,7 @@ class FaqController extends Controller
         $this->validate($request, [
             'title'         => 'required',
             'description'         => 'required',
+            'id_kategori'         => 'required',
         ]); 
 
         //update data tanpa image
@@ -58,7 +63,7 @@ class FaqController extends Controller
         $faq->update([
             'title'                   => $request->title,
             'description'            => $request->description,
-
+            'id_kategori'            => $request->id_kategori,
         ]);
         
 

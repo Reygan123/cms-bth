@@ -10,6 +10,6 @@ class Faq extends Model
     use HasFactory;
 
     protected $fillable = ([
-        'title','description'
+        'title', 'id_kategori','description'
     ]);
 }

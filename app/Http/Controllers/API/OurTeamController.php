@@ -13,9 +13,9 @@ class OurTeamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return response()->json(Ourteam::all(), 200);
+        return response()->json(Ourteam::where('program_id', $id)->get(), 200);
     }
 
     /**

@@ -12,6 +12,10 @@
                                     <span class="btn-icon-left text-primary"><i
                                             class="fa-solid fa-pen-to-square"></i></span>Add FAQ
                                 </a>
+                                <a href="{{ route('admin.kategori_faq.index') }}" class="btn btn-success btn-rounded ml-3">
+                                    <span class="btn-icon-left text-primary"><i
+                                            class="fa-solid fa-pen-to-square"></i></span>Kategori FAQ
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <form action="{{ route('admin.faq.index') }}" method="GET" class="d-flex">

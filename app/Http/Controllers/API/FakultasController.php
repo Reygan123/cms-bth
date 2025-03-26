@@ -10,6 +10,7 @@ use App\Models\Program;
 use App\Models\Unggulan;
 use App\Models\Ourteam;
 use App\Models\Facility;
+use App\Models\Fakultas;
 
 class FakultasController extends Controller
 {
@@ -20,7 +21,12 @@ class FakultasController extends Controller
      */
     public function index()
     {
-        return response()->json(Program::select('id', 'name', 'slug')->get(), 200);
+        return response()->json(Program::select('id', 'name', 'slug', 'image1')->get(), 200);
+    }
+    
+    public function indexFakultas()
+    {
+        return response()->json(Fakultas::select('id', 'name', 'slug', 'image1', 'map', 'subtitle')->get(), 200);
     }
 
     /**
@@ -54,10 +60,24 @@ class FakultasController extends Controller
 
 
         return response()->json([
-            'fakultas' => $fakultas,
+            'departement' => $fakultas,
             'unggulan' => $unggulan,
             'ourteam' => $ourteam,
             'fasilitas' => $fasilitas
+        ], 200);
+    }
+    
+    public function showOneFakultas($slug)
+    {
+        $programs = DB::table('fakultas_program as fp')
+                ->join('programs as p', 'fp.program_id', '=', 'p.id')
+                ->join('fakultas as f', 'fp.fakultas_id', '=', 'f.id')
+                ->where('f.slug', $slug)
+                ->select('p.name as program_name', 'p.slug', 'p.image1', 'f.name as fakultas_name')
+                ->get();
+        return response()->json([
+            'fakultas' => Fakultas::where('slug', $slug)->first(),
+            'departements' => $programs,
         ], 200);
     }
 
