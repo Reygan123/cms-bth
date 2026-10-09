@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Testimony;
+use App\Models\Fakultas;
 
 class TestimoniController extends Controller
 {
@@ -16,6 +17,27 @@ class TestimoniController extends Controller
     public function index()
     {
         return response()->json(Testimony::Latest()->get(), 200);
+    }
+    
+    public function indexHome()
+    {
+        return response()->json(Testimony::where('home', '1')->get(), 200);
+    }
+
+    public function testimoniFakultas($id)
+    {
+        $fakultas = Fakultas::with('programs')->findOrFail($id);
+
+        $programIds = $fakultas->programs->pluck('id');
+
+        $testimoni = Testimony::where('fakultas_display', 1)
+            ->whereIn('program_id', $programIds)
+            ->get();
+
+        return response()->json([
+            'message' => 'Data Berhasil Di ambil',
+            'data' => $testimoni
+        ], 200);
     }
 
     /**
@@ -37,7 +59,7 @@ class TestimoniController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(Testimony::where('program_id', $id)->get(), 200);
     }
 
     /**

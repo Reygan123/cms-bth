@@ -16,14 +16,28 @@ class UnggulanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $unggulans = Unggulan::oldest()->when(request()->q, function ($unggulans) {
-            $unggulans = $unggulans->where('title', 'like', '%' . request()->q . '%');
-        })->paginate(10);
+        // Ambil semua program
+        $programs = Program::all();
 
-        return view('admin.unggulan.index', compact('unggulans'));
+        // Ambil query pencarian
+        $searchQuery = $request->query('q');
+        $selectedProgramId = $request->query('program_id');
+
+        // Query unggulan dengan filter pencarian dan program_id
+        $unggulans = Unggulan::oldest()
+            ->when($searchQuery, function ($query) use ($searchQuery) {
+                $query->where('title', 'like', '%' . $searchQuery . '%');
+            })
+            ->when($selectedProgramId, function ($query) use ($selectedProgramId) {
+                $query->where('program_id', $selectedProgramId);
+            })
+            ->paginate(10);
+
+        return view('admin.unggulan.index', compact('unggulans', 'programs', 'searchQuery', 'selectedProgramId'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -45,33 +59,36 @@ class UnggulanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            // 'image'             => 'required|image|mimes:jpeg,jpg,png,webp|max:1000',
-            'title'             => 'required',
-            'description'       => 'required',
+            'image'       => 'required|image|mimes:jpeg,jpg,png,webp|max:1000',
+            'title'       => 'required',
+            'description' => 'required',
         ]);
 
-        //upload image
-        // $image = $request->file('image');
-        // $image->storeAs('public/unggulans', $image->hashName());
+        // Upload image dengan memastikan ekstensi terdeteksi
+        $image = $request->file('image');
+        $extension = $image->getClientOriginalExtension(); // Ambil ekstensi asli
+        $imageName = time() . '.' . $extension; // Gunakan timestamp agar unik
+        $image->storeAs('public/unggulans', $imageName);
 
+        // Simpan ke database
         $unggulan = Unggulan::create([
-            'title'             => $request->title,
-            'slug'              => Str::slug($request->title, '-'),
-            'description'       => $request->description,
-            'link'              => $request->link,
-            // 'image'             => $image->hashName(),
-            'program_id'                => $request->program_id,
-            'home'                => $request->home,
+            'title'       => $request->title,
+            'slug'        => Str::slug($request->title, '-'),
+            'description' => $request->description,
+            'link'        => $request->link,
+            'image'       => $imageName, // Simpan nama file yang sudah diperbaiki
+            'program_id'  => $request->program_id,
+            'home'        => $request->home ?? 0, // Jika tidak dikirim, set default 0
+            'fakultas'        => $request->fakultas ?? 0, // Jika tidak dikirim, set default 0
         ]);
 
         if ($unggulan) {
-            //redirect dengan pesan sukses
             return redirect()->route('admin.unggulan.index')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
-            //redirect dengan pesan error
             return redirect()->route('admin.unggulan.index')->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
+
 
 
     /**
@@ -113,7 +130,7 @@ class UnggulanController extends Controller
                 'link'              => $request->link,
                 'program_id'                => $request->program_id,
                 'home'                => $request->home,
-
+                'fakultas'                => $request->fakultas ?? 0,
             ]);
         } else {
 
@@ -134,6 +151,7 @@ class UnggulanController extends Controller
                 'image'             => $image->hashName(),
                 'program_id'                => $request->program_id,
                 'home'                => $request->home,
+                'fakultas'                => $request->fakultas,
 
             ]);
         }

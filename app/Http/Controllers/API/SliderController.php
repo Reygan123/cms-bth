@@ -8,6 +8,7 @@ use App\Models\Slider;
 use App\Models\Pixel;
 use App\Models\Ganalytics;
 use App\Models\Welcomechat;
+use App\Models\Sidebanner;
 
 class SliderController extends Controller
 {
@@ -18,7 +19,13 @@ class SliderController extends Controller
      */
     public function index()
     {
-        return response()->json(Slider::all(), 200);
+        return response()->json(Slider::latest()->get(), 200);
+    }
+
+    
+    public function indexSideBanner()
+    {
+        return response()->json(Sidebanner::latest()->take(1)->get(), 200);
     }
     
     public function indexPixel()

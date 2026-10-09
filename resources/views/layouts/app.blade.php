@@ -11,12 +11,11 @@
     <title>{{ $title }} - {{ $q->name }}</title>
     @endforeach
     <!-- css -->
-{{--      
-    <link rel="stylesheet" href="{{ asset('vendor/tailwind/tailwind.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('vendor/tailwind/tailwind.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome/all.min.css') }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
 
     {{-- css baru --}}
     <link rel="stylesheet" href="{{asset('admin/vendor/dropify/dist/css/dropify.min.css')}}">
@@ -35,6 +34,11 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.1/dist/alpine.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+
+    {{-- select --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -73,9 +77,9 @@
 
     </div>
 
-    {{-- <script src="{{ asset('vendor/tailwind/tailwind.js') }}"></script>
+    <!-- <script src="{{ asset('vendor/tailwind/tailwind.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('vendor/fontawesome/all.min.js') }}"></script> --}}
+    <script src="{{ asset('vendor/fontawesome/all.min.js') }}"></script> -->
 
     {{-- js baru  --}}
     

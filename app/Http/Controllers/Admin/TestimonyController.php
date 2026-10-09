@@ -18,16 +18,31 @@ class TestimonyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $testimonies = Testimony::latest()->when(request()->q, function ($testimonies) {
-            $testimonies = $testimonies->where('name', 'like', '%' . request()->q . '%');
-        })->paginate(10);
+        // Ambil semua program
+        $programs = Program::all();
+
+        // Ambil query string dari request
+        $query = $request->q;
+        $programId = $request->program_id;
+
+        // Filter data testimoni berdasarkan pencarian nama dan program_id jika dipilih
+        $testimonies = Testimony::latest()
+            ->when($query, function ($queryBuilder) use ($query) {
+                $queryBuilder->where('name', 'like', '%' . $query . '%');
+            })
+            ->when($programId, function ($queryBuilder) use ($programId) {
+                $queryBuilder->where('program_id', $programId);
+            })
+            ->paginate(10);
+
+        // Ambil judul tertua (oldest)
         $juduls = Judul::oldest()->take(1)->get();
 
-
-        return view('admin.testimony.index', compact('testimonies', 'juduls'));
+        return view('admin.testimony.index', compact('testimonies', 'programs', 'juduls'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -66,6 +81,7 @@ class TestimonyController extends Controller
             'description'        => $request->description,
             'yt_link'              => $request->yt_link,
             'home'              => $request->home,
+            'fakultas_display'              => $request->fakultas_display,
 
 
         ]);
@@ -120,6 +136,7 @@ class TestimonyController extends Controller
                 'description'           => $request->description,
                 'yt_link'              => $request->yt_link,
                 'home'              => $request->home,
+                'fakultas_display'              => $request->fakultas_display,
 
 
             ]);
@@ -143,6 +160,7 @@ class TestimonyController extends Controller
                 'description'        => $request->description,
                 'yt_link'              => $request->yt_link,
                 'home'              => $request->home,
+                'fakultas_display'              => $request->fakultas_display,
 
 
             ]);

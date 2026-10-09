@@ -32,18 +32,25 @@ class ProgramController extends Controller
     public function postHalamanPertama(Request $request)
     {
         $this->validate($request, [
+            'image_head' => 'required|image|mimes:jpeg,jpg,png,webp|max:1000',
             'image1' => 'required|image|mimes:jpeg,jpg,png,webp|max:1000',
             'name' => 'required',
+            'color' => 'required',
             'title1' => 'required',
             'description1' => 'required',
         ]);
 
         $image1 = $request->file('image1');
         $image1->storeAs('public/programs', $image1->hashName());
+        
+        $image_head = $request->file('image_head');
+        $image_head->storeAs('public/programs', $image_head->hashName());
 
         $programData = [
+            'image_head' => $image_head->hashName(),
             'image1' => $image1->hashName(),
             'name' => $request->input('name'),
+            'color' => $request->input('color'),
             'slug' => Str::slug($request->input('name'), '-'),
             'category' => $request->input('category'),
             'ourteam_id' => $request->input('ourteam_id'),
@@ -162,8 +169,10 @@ class ProgramController extends Controller
     public function updateHalamanPertama(Request $request, Program $program)
     {
         $this->validate($request, [
+            'image_head' => 'image|mimes:jpeg,jpg,png,webp|max:1000',
             'image1' => 'image|mimes:jpeg,jpg,png,webp|max:1000',
             'name' => 'required',
+            'color' => 'required',
             'title1' => 'required',
             'description1' => 'required',
         ]);
@@ -177,8 +186,18 @@ class ProgramController extends Controller
             $image1->storeAs('public/programs', $image1->hashName());
             $program->image1 = $image1->hashName();
         }
+        if ($request->hasFile('image_head')) {
+            $this->validate($request, [
+                'image_head' => 'image|mimes:jpeg,jpg,png,webp|max:1000',
+            ]);
+
+            $image_head = $request->file('image_head');
+            $image_head->storeAs('public/programs', $image_head->hashName());
+            $program->image_head = $image_head->hashName();
+        }
 
         // Update other fields for step one
+        $program->color = $request->input('color');
         $program->name = $request->input('name');
         $program->slug = Str::slug($request->input('name'), '-');
         $program->category = $request->input('category');

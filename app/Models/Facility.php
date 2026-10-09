@@ -15,12 +15,19 @@ class Facility extends Model
      * @var array
      */
     protected $fillable = [
+        'program_id',
         'title',
         'slug',
         'subtitle',
         'description',
         'image',
+        'image1',
+        'image2',
+        'image3',
+        'image4',
+        'svg_icon',
         'home',
+        'fakultas_display',
     ];
 
     /**

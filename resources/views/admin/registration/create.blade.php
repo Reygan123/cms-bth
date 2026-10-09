@@ -119,27 +119,101 @@
                                                 </div>
                                                 <!-- End Checkbox untuk Memilih Fakultas -->
 
-                                                <div class="form-group mb-4">
-                                                    <label class="text-label" for="description">Tagline</label>
-                                                    <input class="form-control" type="text" name="description" value="{{ old('description') }}" placeholder="Tagline Registration Path">
-                                                    @error('description')
-                                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
-                                                        <div class="px-4 py-2">
-                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                <div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="description">Tagline</label>
+                                                        <input class="form-control" type="text" name="description" value="{{ old('description') }}" placeholder="Tagline Registration Path">
+                                                        @error('description')
+                                                        <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                            <div class="px-4 py-2">
+                                                                <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                            </div>
                                                         </div>
+                                                        @enderror
                                                     </div>
-                                                    @enderror
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="content">Description</label>
+                                                        <textarea id="editor1" name="content">{{ old('content') }}</textarea>
+                                                        @error('content')
+                                                        <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                            <div class="px-4 py-2">
+                                                                <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                            </div>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                                <div class="form-group mb-4">
-                                                    <label class="text-label" for="content">Description</label>
-                                                    <textarea id="editor1" name="content">{{ old('content') }}</textarea>
-                                                    @error('content')
-                                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
-                                                        <div class="px-4 py-2">
-                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                <div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="title1">Tagline About</label>
+                                                        <input class="form-control" type="text" name="title1" value="{{ old('title1') }}" placeholder="Tagline About">
+                                                        @error('title1')
+                                                        <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                            <div class="px-4 py-2">
+                                                                <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                            </div>
                                                         </div>
+                                                        @enderror
                                                     </div>
-                                                    @enderror
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="content">Description About</label>
+                                                        <textarea id="editor2" name="description1">{{ old('description1') }}</textarea>
+                                                        @error('description1')
+                                                        <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                            <div class="px-4 py-2">
+                                                                <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                            </div>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="title1">Tagline Mengapa</label>
+                                                        <input class="form-control" type="text" name="title2" value="{{ old('title2') }}" placeholder="Tagline Mengapa">
+                                                        @error('title2')
+                                                        <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                            <div class="px-4 py-2">
+                                                                <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                            </div>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="content">Description Mengapa</label>
+                                                        <textarea id="editor3" name="description2">{{ old('description2') }}</textarea>
+                                                        @error('description2')
+                                                        <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                            <div class="px-4 py-2">
+                                                                <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                            </div>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="title1">Tagline Persyaratan</label>
+                                                        <input class="form-control" type="text" name="title3" value="{{ old('title3') }}" placeholder="Tagline Persyaratan">
+                                                        @error('title3')
+                                                        <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                            <div class="px-4 py-2">
+                                                                <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                            </div>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="content">Description Persyaratan</label>
+                                                        <textarea id="editor4" name="description3">{{ old('description3') }}</textarea>
+                                                        @error('description3')
+                                                        <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                            <div class="px-4 py-2">
+                                                                <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                            </div>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 
                                             </div>
@@ -168,9 +242,42 @@
                                                 </div>
                                                 
                                                 <div class="mb-4 mt-4">
-                                                    <label class="text-gray-700" for="image">Image (Max Size: 750kb)</label>
+                                                    <label class="text-gray-700" for="image">Image Tagline(Max Size: 750kb)</label>
                                                     <input type="file" class="dropify" data-default-file="" id="image" name="image" />
                                                     @error('image')
+                                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                        <div class="px-4 py-2">
+                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                        </div>
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="mb-4 mt-4">
+                                                    <label class="text-gray-700" for="image1">Image About (Max Size: 750kb)</label>
+                                                    <input type="file" class="dropify" data-default-file="" id="image1" name="image1" />
+                                                    @error('image1')
+                                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                        <div class="px-4 py-2">
+                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                        </div>
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="mb-4 mt-4">
+                                                    <label class="text-gray-700" for="image2">Image Mengapa (Max Size: 750kb)</label>
+                                                    <input type="file" class="dropify" data-default-file="" id="image2" name="image2" />
+                                                    @error('image2')
+                                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                        <div class="px-4 py-2">
+                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                        </div>
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="mb-4 mt-4">
+                                                    <label class="text-gray-700" for="image3">Image Persyaratan (Max Size: 750kb)</label>
+                                                    <input type="file" class="dropify" data-default-file="" id="image3" name="image3" />
+                                                    @error('image3')
                                                     <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
                                                         <div class="px-4 py-2">
                                                             <p class="text-gray-600 text-sm">{{ $message }}</p>
@@ -223,6 +330,27 @@
 <script>
     ClassicEditor
         .create(document.querySelector('#editor1'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor2'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor3'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor4'))
         .catch(error => {
             console.error(error);
         });

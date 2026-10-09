@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Kategori FAQs'])
+@extends('layouts.app', ['title' => 'Categorys FAQs'])
 
 @section('content')
     <div class="container">

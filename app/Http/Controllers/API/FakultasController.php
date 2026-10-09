@@ -49,18 +49,27 @@ class FakultasController extends Controller
     public function show($slug)
     {
         $fakultas = Program::where('slug', $slug)->firstOrFail();
+        $test = DB::table('fakultas_program as fp')
+        ->join('programs as p', 'fp.program_id', '=', 'p.id')
+        ->join('fakultas as f', 'fp.fakultas_id', '=', 'f.id')
+        ->where('p.slug', $slug)
+        ->select('f.name as fakultas_name', 'f.slug as fakultas_slug') // Ambil juga slug fakultas
+        ->first();
+    
+
         $unggulan = Unggulan::where('program_id', $fakultas->id)->get(); // Mengambil semua unggulan terkait
+        $dekan = Ourteam::where('id', $fakultas->ourteam_id)->first(); // Mengambil semua unggulan terkait
         $ourteam = Ourteam::where('program_id', $fakultas->id)->get(); // Mengambil semua unggulan terkait
         $fasilitas = DB::table('facilities')
-            ->join('facility_program', 'facilities.id', '=', 'facility_program.facility_id')
-            ->join('programs', 'facility_program.program_id', '=', 'programs.id')
-            ->select('facilities.title', 'facilities.image', 'facility_program.id', 'programs.name')
-            ->where('programs.slug', $slug)
+            ->select('facilities.title', 'facilities.image', 'facilities.subtitle', 'facilities.description',)
+            ->where('facilities.program_id', $fakultas->id)
             ->get();
 
 
         return response()->json([
             'departement' => $fakultas,
+            'test' => $test,
+            'dekan' => $dekan,
             'unggulan' => $unggulan,
             'ourteam' => $ourteam,
             'fasilitas' => $fasilitas

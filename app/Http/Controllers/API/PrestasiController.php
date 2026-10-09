@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Prestasi;
 use App\Models\Program;
+use App\Models\Fakultas;
+use App\Models\Categoriprestasi;
 
 class PrestasiController extends Controller
 {
@@ -16,7 +18,17 @@ class PrestasiController extends Controller
      */
     public function index()
     {
-        return response()->json(Prestasi::where('home', '1')->orderBy('created_at', 'desc')->get(), 200);
+        return response()->json(Prestasi::where('home', '1')->orderBy('created_at', 'desc')->with('categoriprestasi')->get(), 200);
+    }
+
+    public function indexStstistik()
+    {
+        $data = Categoriprestasi::withCount('prestasis')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $data
+        ]);
     }
 
     public function getByProgramSlug($slug)
@@ -37,6 +49,22 @@ class PrestasiController extends Controller
         // Kembalikan 200 dengan data prestasi (meskipun kosong)
         return response()->json([
             'message' => 'Successfully retrieved achievements.',
+            'data' => $prestasi
+        ], 200);
+    }
+
+    public function getByFakultas($id)
+    {
+        $fakultas = Fakultas::with('programs')->findOrFail($id);
+
+        $programIds = $fakultas->programs->pluck('id');
+
+        $prestasi = Prestasi::where('fakultas_display', 1)
+            ->whereIn('program_id', $programIds)
+            ->get();
+
+        return response()->json([
+            'message' => 'Data Berhasil Di ambil',
             'data' => $prestasi
         ], 200);
     }

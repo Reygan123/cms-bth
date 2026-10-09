@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Program'])
+@extends('layouts.app', ['title' => 'Departement'])
 
 @section('content')
     <div class="container">
@@ -51,32 +51,34 @@
                                                             </div>
                                                         @enderror
                                                     </div>
-                                                    <!-- Tambahkan Checkbox untuk Memilih Fasilitas -->
                                                     <div class="form-group mb-4">
-                                                        <label class="text-label">Fakultas</label>
-                                                        <div class="row">
-                                                            @foreach ($facilities as $facility)
-                                                            <div class="col-sm-6">
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <input type="checkbox" name="facility_ids[]"
-                                                                            value="{{ $facility->id }}"
-                                                                            {{ in_array($facility->id, old('facility_ids', $program->facilities->pluck('id')->toArray())) ? 'checked' : '' }}>
-                                                                        {{ $facility->title }}
-                                                                    </label>
-                                                                </div>
+                                                        <label class="text-label mb-2" for="color">Color Code Identities</label>
+                                                        <div class="card">
+                                                            <div class="d-flex align-items-center gap-3">
+                                                                <input
+                                                                    id="color"
+                                                                    class="form-control form-control-color"
+                                                                    type="color"
+                                                                    name="color"
+                                                                    value="{{ old('color', $program->color ?? '#4197CB') }}"
+                                                                    oninput="document.getElementById('color-preview').textContent = this.value"
+                                                                    style="width: 60px; height: 40px; border: none; cursor: pointer;"
+                                                                >
+                                                                <span id="color-preview" class="text-sm font-mono">
+                                                                    {{ old('color', $program->color ?? '#4197CB') }}
+                                                                </span>
                                                             </div>
-                                                        @endforeach
                                                         </div>
-                                                        @error('facility_ids')
-                                                            <div
-                                                                class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+
+                                                        @error('color')
+                                                            <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
                                                                 <div class="px-4 py-2">
                                                                     <p class="text-gray-600 text-sm">{{ $message }}</p>
                                                                 </div>
                                                             </div>
                                                         @enderror
                                                     </div>
+
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <div class="form-group mb-4">
@@ -179,7 +181,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="text-label" for="name">Program's Leader</label>
-                                                        <select class="form-control" name="ourteam_id">
+                                                        <select class="js-example-basic-single form-control" name="ourteam_id">
 
                                                             @foreach ($ourteams as $ourteam)
                                                                 <option class="py-1" value="{{ $ourteam->id }}"
@@ -198,6 +200,28 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        @if ($program->image_head && file_exists(public_path('storage/programs/' . $program->image_head)))
+                                                            <img src="{{ asset('storage/programs/' . $program->image_head) }}"
+                                                                alt="{{ $program->name }}" class="admin-edit-image">
+                                                        @else
+                                                            <img src="{{ asset('storage/identities/no_image.jpg') }}"
+                                                                class="admin-edit-image">
+                                                        @endif
+                                                    </div>
+                                                    <div class="mb-4 mt-4">
+                                                        <label class="text-gray-700" for="image_head">Cover Headline</label>
+                                                        <input type="file" class="dropify" data-default-file=""
+                                                            id="image_head" name="image_head" />
+                                                        @error('image_head')
+                                                            <div
+                                                                class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                                <div class="px-4 py-2">
+                                                                    <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                                </div>
+                                                            </div>
+                                                        @enderror
+                                                    </div>
                                                     <div class="form-group">
                                                         @if ($program->image1 && file_exists(public_path('storage/programs/' . $program->image1)))
                                                             <img src="{{ asset('storage/programs/' . $program->image1) }}"
@@ -268,4 +292,9 @@
                 console.error(error);
             });
     </script>
+    <script>
+    $('.js-example-basic-single').select2({
+        placeholder: 'Select an option',
+    });
+</script>
 @endsection

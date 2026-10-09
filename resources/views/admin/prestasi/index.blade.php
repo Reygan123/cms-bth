@@ -1,6 +1,26 @@
 @extends('layouts.app', ['title' => 'Achievements'])
 
 @section('content')
+
+<style>
+    /* Membuat Select2 menjadi Rounded */
+.select2-container .select2-selection--single {
+    border-radius: 50px !important; /* Agar rounded */
+    height: 40px !important; /* Sesuaikan tinggi */
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border: 1px solid #ced4da !important;
+}
+
+/* Mengatur panah di Select2 agar posisinya bagus */
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 45% !important;
+    right: 10px;
+    transform: translateY(-50%) !important;
+}
+</style>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -14,72 +34,59 @@
                                 </a>
                             </div>
                             <div class="col-sm-6">
-                                <form action="{{ route('admin.prestasi.index') }}" method="GET" class="d-flex">
-                                    <input class="form-control input-rounded" type="text" name="q"
-                                           value="{{ request()->query('q') }}" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-primary btn-rounded ml-4" type="submit">Search</button>
-                                </form>
+                            <form action="{{ route('admin.prestasi.index') }}" method="GET" class="d-flex">
+                                <select name="program_id" class="js-example-basic-single form-control rounded-pill" onchange="this.form.submit()">
+                                    <option value="">Semua Program</option>
+                                    @foreach ($programs as $program)
+                                        <option value="{{ $program->id }}" {{ request('program_id') == $program->id ? 'selected' : '' }}>
+                                            {{ $program->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <input class="form-control input-rounded ml-2" type="text" name="q"
+                                    value="{{ request()->query('q') }}" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-primary btn-rounded ml-2" type="submit">Search</button>
+                            </form>
                             </div>
                         </div>
 
                         <div class="default-tab">
-                            <ul class="nav nav-tabs" role="tablist">
-                                @php
-                                    $categories = $prestasis->groupBy(function ($item) {
-                                        return $item->program->name ?? 'No Category';
-                                    });
-                                @endphp
-
-                                @foreach ($categories as $category => $items)
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ $loop->first ? 'active' : '' }}" data-toggle="tab"
-                                           href="#category-{{ Str::slug($category) }}">{{ $category }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                            <div class="tab-content">
-                                @foreach ($categories as $category => $items)
-                                    <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
-                                         id="category-{{ Str::slug($category) }}" role="tabpanel">
-                                        <div class="pt-4">
-                                            <table class="table table-responsive-sm">
-                                                @foreach ($items as $prestasi)
-                                                    <tr>
-                                                        <td>
-                                                            <input type="checkbox" name="prestasis[]" value="{{ $prestasi->id }}">
-                                                        </td>
-                                                        <td>
-                                                            <h6>{{ $prestasi->title }}</h6> 
-                                                            <div>{{ $prestasi->name }} | {{ $prestasi->categoriprestasi->name }}</div> 
-                                                            <div class="mt-4">
-                                                                <a href="{{ route('admin.prestasi.edit', $prestasi->id) }}"
-                                                                   class="badge badge-primary mr-2 badge-rounded">Edit</a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            @if ($prestasi->image && file_exists(public_path('storage/prestasis/' . $prestasi->image)))
-                                                                <img src="{{ asset('storage/prestasis/' . $prestasi->image) }}"
-                                                                     alt="{{ $prestasi->title }}" class="admin-index-image">
-                                                            @else
-                                                                <img src="{{ asset('storage/identities/no_image.jpg') }}"
-                                                                     class="admin-edit-image">
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </table>
-                                        </div>
-                                    </div>
-                                @endforeach
-                                <button id="delete-selected" class="btn btn-danger btn-rounded mx-4">
-                                    Delete Selected <span class="btn-icon-right"><i class="fa-solid fa-trash-can"></i></span>
-                                </button>
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-center">
-                                        {{ $prestasis->links() }}
-                                    </ul>
-                                </nav>
+                            <div class="pt-4">
+                                <table class="table table-responsive-sm">
+                                    @foreach ($prestasis as $prestasi)
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="prestasis[]" value="{{ $prestasi->id }}">
+                                            </td>
+                                            <td>
+                                                <h6>{{ $prestasi->title }}</h6> 
+                                                <div>{{ $prestasi->name }} | {{ $prestasi->categoriprestasi->name }}</div> 
+                                                <div class="mt-4">
+                                                    <a href="{{ route('admin.prestasi.edit', $prestasi->id) }}"
+                                                    class="badge badge-primary mr-2 badge-rounded">Edit</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @if ($prestasi->image && file_exists(public_path('storage/prestasis/' . $prestasi->image)))
+                                                    <img src="{{ asset('storage/prestasis/' . $prestasi->image) }}"
+                                                        alt="{{ $prestasi->title }}" class="admin-index-image">
+                                                @else
+                                                    <img src="{{ asset('storage/identities/no_image.jpg') }}"
+                                                        class="admin-edit-image">
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
                             </div>
+                            <button id="delete-selected" class="btn btn-danger btn-rounded mx-4">
+                                Delete Selected <span class="btn-icon-right"><i class="fa-solid fa-trash-can"></i></span>
+                            </button>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    {{ $prestasis->links() }}
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -156,4 +163,10 @@
             }
         }
     </script>
+
+<script>
+    $('.js-example-basic-single').select2({
+        placeholder: 'Pilih Program Studi',
+    });
+</script>
 @endsection

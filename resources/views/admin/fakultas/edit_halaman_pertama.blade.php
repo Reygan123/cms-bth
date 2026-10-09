@@ -29,6 +29,33 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group mb-4">
+                                                        <label class="text-label mb-2" for="color">Color Code Identities</label>
+                                                        <div class="card">
+                                                            <div class="d-flex align-items-center gap-3">
+                                                                <input
+                                                                    id="color"
+                                                                    class="form-control form-control-color"
+                                                                    type="color"
+                                                                    name="color"
+                                                                    value="{{ old('color', $fakultas->color ?? '#4197CB') }}"
+                                                                    oninput="document.getElementById('color-preview').textContent = this.value"
+                                                                    style="width: 60px; height: 40px; border: none; cursor: pointer;"
+                                                                >
+                                                                <span id="color-preview" class="text-sm font-mono">
+                                                                    {{ old('color', $fakultas->color ?? '#4197CB') }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        @error('color')
+                                                            <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                                <div class="px-4 py-2">
+                                                                    <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                                </div>
+                                                            </div>
+                                                        @enderror
+                                            </div>
+                                            <div class="form-group mb-4">
                                                 <label class="text-label" for="subtitle">Tagline</label>
                                                 <input class="form-control" type="text" name="subtitle" value="{{ old('subtitle', $fakultas->subtitle) }}" placeholder="fakultas Tagline">
                                                 @error('subtitle')

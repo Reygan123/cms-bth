@@ -9,13 +9,21 @@ use App\Models\KategoriFaq;
 
 class FaqController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $faqs = Faq::oldest()->when(request()->q, function($faq) {
-            $faq = $faq->where('name', 'like', '%'. request()->q . '%');
-        })->paginate(15);
-        return view('admin.faq.index', compact('faqs'));
+        $query = $request->input('q');
+
+        $faqs = Faq::when($query, function ($queryBuilder) use ($query) {
+                return $queryBuilder->where('question', 'like', "%$query%")
+                                    ->orWhere('answer', 'like', "%$query%");
+            })
+            ->oldest()
+            ->paginate(5)
+            ->appends(['q' => $query]); // Menyimpan query search saat pagination
+
+        return view('admin.faq.index', compact('faqs', 'query'));
     }
+
 
     public function create()
     {

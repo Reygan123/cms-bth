@@ -5,6 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Organisasi;
+use App\Models\KategoriOrganisasi;
+use App\Models\Program;
+use App\Models\Fakultas;
 
 class OrganisasiController extends Controller
 {
@@ -15,7 +18,61 @@ class OrganisasiController extends Controller
      */
     public function index()
     {
-        return response()->json(Organisasi::all(), 200);
+        $organisasi = Organisasi::with('kategori')->get();
+
+        return response()->json($organisasi, 200);
+    }
+    
+    public function indexHome()
+    {
+        $organisasi = Organisasi::where('home', '1')->with('kategori')->get();
+
+        return response()->json($organisasi, 200);
+    }
+    
+    public function indexKategoriOrganisasi()
+    {
+        $kategoris = KategoriOrganisasi::with('organisasis')->get();
+
+        return response()->json($kategoris, 200);
+    }
+
+
+    public function organisasiFakultas($id)
+    {
+        $fakultas = Fakultas::with('programs')->findOrFail($id);
+
+        $programIds = $fakultas->programs->pluck('id');
+
+        $organisasi = Organisasi::where('fakultas_display', 1)
+            ->whereIn('program_id', $programIds)
+            ->with('kategori')
+            ->get();
+
+        return response()->json([
+            'message' => 'Data Berhasil Di ambil',
+            'data' => $organisasi
+        ], 200);
+    }
+
+    public function indexDepartementOrganisasi($id)
+    {
+        $department = Program::with('organisasis')->findOrFail($id);
+
+        $programIds = $department->pluck('id');
+
+        // Ambil organisasi yang punya hubungan ATAU fakultas_display = 1
+        $organisasi = Organisasi::where(function ($query) use ($programIds) {
+                $query->whereIn('program_id', $programIds);
+            })
+            ->orWhere('fakultas_display', 1)
+            ->with('kategori')
+            ->get();
+
+        return response()->json([
+            'message' => 'Data Berhasil Di ambil',
+            'data' => $organisasi
+        ], 200);
     }
 
     /**

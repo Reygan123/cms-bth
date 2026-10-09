@@ -42,6 +42,17 @@
                                                 <div class="flex mt-4">
                                                     <a href="{{ route('admin.registration.edit', $registration->id) }}"
                                                         class="badge badge-primary mr-2 badge-rounded">Edit</a>
+                                                    <form action="{{ route('admin.registration.destroy', $registration->id) }}" 
+                                                        method="POST" 
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" 
+                                                                class="badge badge-danger mr-2 badge-rounded border-0"
+                                                                onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                                            Hapus
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -54,13 +65,13 @@
                             </table>
 
                             <div class="mt-4">
-                                <button id="delete-selected" class="btn btn-danger btn-rounded mx-4">
+                                <!-- <button id="delete-selected" class="btn btn-danger btn-rounded mx-4">
                                     Delete Selected <span class="btn-icon-right"><i
                                             class="fa-solid fa-trash-can"></i></span>
-                                </button>
+                                </button> -->
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination justify-content-center">
-                                        {{ $registrations->links() }}
+                                        {{ $registrations->links('pagination::bootstrap-5') }}
                                     </ul>
                                 </nav>
                             </div>

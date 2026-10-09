@@ -54,6 +54,12 @@ class Program extends Model
         return $this->belongsTo(Ourteam::class);
     }
 
+    public function organisasis()
+    {
+        return $this->hasMany(Organisasi::class);
+    }
+
+
     /**
      * testimony
      *

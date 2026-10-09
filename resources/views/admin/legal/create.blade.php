@@ -37,6 +37,18 @@
                                                     </div>
                                                 @enderror
                                             </div>
+                                            <div class="form-group mb-4">
+                                                <label class="text-label" for="file">File</label>
+                                                <input type="file" class="form-control" name="file"
+                                                    value="{{ old('file') }}">
+                                                @error('file')
+                                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden">
+                                                        <div class="px-4 py-2">
+                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                        </div>
+                                                    </div>
+                                                @enderror
+                                            </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="mb-2 mt-4">

@@ -18,7 +18,10 @@
                                                 <div class="form-group">
                                                     <input type="checkbox" name="home" id="home" value="1" {{ old('home') ? 'checked' : '' }}>
                                                     <label for="home" class="ml-2">Display on Home</label>
-    
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="checkbox" name="fakultas_display" id="fakultas_display" value="1" {{ old('fakultas_display') ? 'checked' : '' }}>
+                                                    <label for="fakultas_display" class="ml-2">Display on Fakultas</label>
                                                 </div>
                                                 @error('home')
                                                     <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
@@ -77,6 +80,18 @@
                                                 <input type="text" class="form-control" name="name"
                                                     value="{{ old('name') }}">
                                                 @error('name')
+                                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden">
+                                                        <div class="px-4 py-2">
+                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                        </div>
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <label class="text-label" for="tanggal">Tanggal</label>
+                                                <input type="date" class="form-control" name="tanggal"
+                                                    value="{{ old('tanggal') }}">
+                                                @error('tanggal')
                                                     <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden">
                                                         <div class="px-4 py-2">
                                                             <p class="text-gray-600 text-sm">{{ $message }}</p>

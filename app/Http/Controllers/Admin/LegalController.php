@@ -40,29 +40,33 @@ class LegalController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'image'             => 'required|image|mimes:jpeg,jpg,png,webp|max:1500',
-            'title'             => 'required',
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,jpg,png,webp|max:1500',
+            'file'  => 'required|mimes:jpeg,jpg,png,pdf|max:5500',
+            'title' => 'required|string|max:255',
         ]);
 
-        //upload image
+        // Upload image
         $image = $request->file('image');
         $image->storeAs('public/identities', $image->hashName());
 
-        $legal = Legal::create([
-            'title'             => $request->title,
-            'description'       => $request->description,
-            'image'             => $image->hashName(),
+        // Upload file
+        $file = $request->file('file');
+        $file->storeAs('public/files', $file->hashName());
+
+        // Save to DB
+        Legal::create([
+            'title'       => $request->title,
+            'description' => $request->description,
+            'image'       => $image->hashName(),
+            'file'        => $file->hashName(),
         ]);
 
-        if($legal){
-            //redirect dengan pesan sukses
-            return redirect()->route('admin.legal.index')->with(['success' => 'Data Berhasil Disimpan!']);
-        }else{
-            //redirect dengan pesan error
-            return redirect()->route('admin.legal.index')->with(['error' => 'Data Gagal Disimpan!']);
-        }
+        return redirect()
+            ->route('admin.legal.index')
+            ->with(['success' => 'Data Berhasil Disimpan!']);
     }
+
 
     /**
      * edit
@@ -86,42 +90,47 @@ class LegalController extends Controller
     public function update(Request $request, Legal $legal)
     {
         $this->validate($request, [
-            'image'                 => 'nullable|image|mimes:jpeg,jpg,png|max:1500',
-            'title'                 => 'required',
-        ]); 
-        
-        //check if image is not present
-        if (!$request->hasFile('image')) {
-            
-            //update data without image
-            $legal->update([
-                'title'                 => $request->title,
-                'description'           => $request->description,
-            ]);
-        } else {
-            //delete old image
-            Storage::disk('local')->delete('public/identities/'.basename($legal->image));
+            'image' => 'nullable|image|mimes:jpeg,jpg,png|max:1500',
+            'file'  => 'nullable|mimes:jpeg,jpg,png,pdf|max:5500',
+            'title' => 'required',
+        ]);
 
-            //upload new image
+        $data = [
+            'title'       => $request->title,
+            'description' => $request->description,
+        ];
+
+        // handle image jika ada
+        if ($request->hasFile('image')) {
+            // hapus file lama
+            if ($legal->image && Storage::exists('public/identities/' . $legal->image)) {
+                Storage::delete('public/identities/' . $legal->image);
+            }
+
             $image = $request->file('image');
             $image->storeAs('public/identities', $image->hashName());
-
-            //update with new image
-            $legal->update([
-                'image'                => $image->hashName(),
-                'title'                => $request->title,
-                'description'          => $request->description,
-            ]);
+            $data['image'] = $image->hashName();
         }
 
-        if ($legal) {
-            //redirect with success message
-            return redirect()->route('admin.legal.index')->with(['success' => 'Data Berhasil Diupdate!']);
-        } else {
-            //redirect with error message
-            return redirect()->route('admin.legal.index')->with(['error' => 'Data Gagal Diupdate!']);
+        // handle file jika ada
+        if ($request->hasFile('file')) {
+            // hapus file lama
+            if ($legal->file && Storage::exists('public/files/' . $legal->file)) {
+                Storage::delete('public/files/' . $legal->file);
+            }
+
+            $file = $request->file('file');
+            $file->storeAs('public/files', $file->hashName());
+            $data['file'] = $file->hashName();
         }
+
+        $legal->update($data);
+
+        return redirect()->route('admin.legal.index')
+            ->with($legal ? ['success' => 'Data Berhasil Diupdate!'] : ['error' => 'Data Gagal Diupdate!']);
     }
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -5,6 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Fakultas;
+use App\Models\Program;
+use App\Models\Registration;
+use App\Models\Facility;
+use App\Models\Partner;
+use App\Models\Unggulan;
 use App\Models\VisitorCount;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -46,8 +52,15 @@ class DashboardController extends Controller
         $yearlyCount = VisitorCount::whereYear('created_at', Carbon::now()->year)->sum('count');
         $sumVisitors = VisitorCount::sum('count');
         $sumPosts = Post::count();
+
+        $fakultasCount = Fakultas::count();
+        $programCount = Program::count();
+        $registrationCount = Registration::count();
+        $facilityCount = Facility::count();
+        $partnerCount = Partner::count();
+        $unggulanCount = Unggulan::count();
         
-        return view('admin.dashboard.index', compact('monthlyVisitors','yearlyCount', 'sumVisitors','sumPosts'));
+        return view('admin.dashboard.index', compact('monthlyVisitors','yearlyCount', 'sumVisitors','sumPosts', 'fakultasCount', 'programCount', 'registrationCount', 'facilityCount', 'partnerCount', 'unggulanCount'));
     }
 
 

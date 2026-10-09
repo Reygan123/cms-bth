@@ -35,16 +35,7 @@
                                         <input type="checkbox" name="fakultas[]" value="{{ $fakultas->id }}">
                                     </th>
                                     <td>
-                                        <h5>{{ $fakultas->name }}</h5>
-                                        <div class="mt-2">
-                                            <div class="row">
-                                                <div class="col-md-3 col-sm-6"><i class="fa-solid fa-calendar-check"></i> {{ $fakultas->age }} years old</div>
-                                                <div class="col-md-3 col-sm-6"><i class="fa-solid fa-calendar-days"></i> {{ $fakultas->weekly }} days in a week</div>
-                                                <div class="col-md-3 col-sm-6"><i class="fa-solid fa-clock-rotate-left"></i> {{ $fakultas->periode }} hours in a day</div>
-                                                <div class="col-md-3 col-sm-6"><i class="fa-solid fa-people-roof"></i> {{ $fakultas->class_size }} students in a class</div>
-                                            </div>
-                                        </div>
-                                        <div class="flex mt-4">
+                                        <h5>{{ $fakultas->name }}</h5>                                        <div class="flex mt-4">
                                             <a href="{{ route('admin.fakultas.edit.halaman-pertama', $fakultas->id) }}" class="badge badge-primary mr-2 badge-rounded">Edit</a>
                                         </div>
                                     </td>

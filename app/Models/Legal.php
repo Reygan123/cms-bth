@@ -15,6 +15,6 @@ class Legal extends Model
      * @var array
      */
     protected $fillable = [
-        'title','description','image'
+        'title','description','image', 'file'
     ];
 } 

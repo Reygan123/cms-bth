@@ -108,13 +108,45 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
-                                                <div class="form-group mb-4">
-                                                    <label class="text-label" for="description">Tagline</label>
-                                                    <input class="form-control" type="text" name="description" value="{{ old('description', $registration->description) }}" placeholder="Tagline Registration Path">
+                                                <div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="description">Tagline</label>
+                                                        <input class="form-control" type="text" name="description" value="{{ old('description', $registration->description) }}" placeholder="Tagline Registration Path">
+                                                    </div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="content">Description</label>
+                                                        <textarea id="editor1" name="content">{{ old('content', $registration->content) }}</textarea>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group mb-4">
-                                                    <label class="text-label" for="content">Description</label>
-                                                    <textarea id="editor1" name="content">{{ old('content', $registration->content) }}</textarea>
+                                                <div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="description">Tagline About</label>
+                                                        <input class="form-control" type="text" name="title1" value="{{ old('description', $registration->title1) }}" placeholder="Tagline About">
+                                                    </div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="content">Description About</label>
+                                                        <textarea id="editor2" name="description1">{{ old('content', $registration->description1) }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="description">Tagline Mengapa</label>
+                                                        <input class="form-control" type="text" name="title2" value="{{ old('description', $registration->title2) }}" placeholder="Tagline Mengapa">
+                                                    </div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="content">Description Mengapa</label>
+                                                        <textarea id="editor3" name="description2">{{ old('content', $registration->description2) }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="description">Tagline Persyaratan</label>
+                                                        <input class="form-control" type="text" name="title3" value="{{ old('description', $registration->title3) }}" placeholder="Tagline Persyaratan">
+                                                    </div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="text-label" for="content">Description Persyaratan</label>
+                                                        <textarea id="editor4" name="description3">{{ old('content', $registration->description3) }}</textarea>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
@@ -127,8 +159,20 @@
                                                     <input class="form-control" type="text" name="link" value="{{ old('link', $registration->link) }}" placeholder="Link For CTA">
                                                 </div>
                                                 <div class="mb-4 mt-4">
-                                                    <label class="text-gray-700" for="image">Image (Max Size: 750kb)</label>
+                                                    <label class="text-gray-700" for="image">Image Tagline (Max Size: 750kb)</label>
                                                     <input type="file" class="dropify" data-default-file="{{ asset('storage/registration/' . $registration->image) }}" id="image" name="image" />
+                                                </div>
+                                                <div class="mb-4 mt-4">
+                                                    <label class="text-gray-700" for="image1">Image About (Max Size: 750kb)</label>
+                                                    <input type="file" class="dropify" data-default-file="{{ asset('storage/registration/' . $registration->image1) }}" id="image" name="image1" />
+                                                </div>
+                                                <div class="mb-4 mt-4">
+                                                    <label class="text-gray-700" for="image2">Image Mengapa (Max Size: 750kb)</label>
+                                                    <input type="file" class="dropify" data-default-file="{{ asset('storage/registration/' . $registration->image2) }}" id="image" name="image2" />
+                                                </div>
+                                                <div class="mb-4 mt-4">
+                                                    <label class="text-gray-700" for="image3">Image Persyaratan (Max Size: 750kb)</label>
+                                                    <input type="file" class="dropify" data-default-file="{{ asset('storage/registration/' . $registration->image3) }}" id="image" name="image3" />
                                                 </div>
                                                 <div class="form-group mb-4">
                                                     <label class="text-label" for="pricing">Pricing</label>
@@ -161,6 +205,27 @@
 <script>
     ClassicEditor
         .create(document.querySelector('#editor1'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor2'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor3'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor4'))
         .catch(error => {
             console.error(error);
         });

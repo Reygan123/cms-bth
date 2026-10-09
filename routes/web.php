@@ -177,9 +177,12 @@ Route::prefix('admin')->group(function () {
         Route::get('/admin/titlebenefit/{titlebenefit}/delete-image/{image}', [TitlebenefitController::class, 'deleteImage'])->name('admin.titlebenefit.deleteImage');
         Route::resource('/titlebenefit', TitlebenefitController::class, ['as' => 'admin']);
         
+        
         //route resource organosasi
         Route::resource('/organisasi', OrganisasiController::class, ['as' => 'admin']);
-
+        
+        //route resource Kategori organosasi
+        Route::resource('/kategoriOrganisasi', KategoriOrganisasiController::class, ['as' => 'admin']);
 
         //route resource story
         Route::resource('/story', StoryController::class, ['as' => 'admin']);
@@ -218,6 +221,10 @@ Route::prefix('admin')->group(function () {
         Route::resource('/faq', FaqController::class, ['as' => 'admin']);
         Route::delete('admin/faq/massDestroy', [FaqController::class, 'massDestroy'])->name('admin.faq.massDestroy');
         
+        //route resource Akademik
+        Route::resource('/akademik', AkademikController::class, ['as' => 'admin']);
+        Route::delete('admin/akadmeik/massDestroy', [AkademikController::class, 'massDestroy'])->name('admin.akademik.massDestroy');
+        
         //route resource registration
         Route::resource('/registration', RegistrationController::class, ['as' => 'admin']);
         Route::delete('admin/registration/massDestroy', [RegistrationController::class, 'massDestroy'])->name('admin.registration.massDestroy');
@@ -226,9 +233,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('/kategori_faq', KategoriFaqController::class, ['as' => 'admin']);
         Route::delete('admin/kategori_faq/massDestroy', [KategoriFaqController::class, 'massDestroy'])->name('admin.kategori_faq.massDestroy');
 
-
-
-        //route resource Alumni 
+        //route resource Alumni ac
         Route::resource('/alumni', AlumniController::class, ['as' => 'admin']);
         Route::delete('admin/alumni/massDestroy', [AlumniController::class, 'massDestroy'])->name('admin.alumni.massDestroy');
 

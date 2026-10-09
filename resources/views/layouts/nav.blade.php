@@ -145,6 +145,7 @@
                     <li><a href="{{ route('admin.testimony.index') }}">Testimonies</a></li>
                     <li><a href="{{ route('admin.portofolio.index') }}">Portofolios</a></li>
                     <li><a href="{{ route('admin.dukungan.index') }}">Supports</a></li>
+                    <li><a href="{{ route('admin.akademik.index') }}">Kalender Akademik</a></li>
                     <li><a href="{{ route('admin.faq.index') }}">FAQs</a></li>
                 </ul>
             </li>

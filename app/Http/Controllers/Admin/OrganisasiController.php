@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Organisasi;
+use App\Models\KategoriOrganisasi;
+use App\Models\Program;
 use Illuminate\Support\Facades\Storage;
 
 class OrganisasiController extends Controller
@@ -12,7 +14,7 @@ class OrganisasiController extends Controller
     public function index()
     {
         $organisasis = Organisasi::latest()->when(request()->q, function ($organisasis) {
-            $organisasis = $organisasis->where('name', 'like', '%' . request()->q . '%');
+            $organisasis = $organisasis->where('title', 'like', '%' . request()->q . '%');
         })->paginate(10);
 
         return view('admin.organisasi.index', compact('organisasis'));
@@ -25,7 +27,9 @@ class OrganisasiController extends Controller
      */
     public function create()
     {
-        return view('admin.organisasi.create');
+        $programs = Program::latest()->get();
+        $kategoris = KategoriOrganisasi::all();
+        return view('admin.organisasi.create',  compact('programs', 'kategoris'));
     }
 
     /**
@@ -38,6 +42,7 @@ class OrganisasiController extends Controller
     {
         $this->validate($request, [
             'title'             => 'required',
+            'kategori_id'             => 'required',
             'image' => 'image|mimes:jpeg,jpg,png,webp|max:1000',
         ]);
 
@@ -47,8 +52,12 @@ class OrganisasiController extends Controller
 
         $organisasi = Organisasi::create([
             'image'                => $image->hashName(),
+            'kategori_id'                   => $request->kategori_id,
             'title'                   => $request->title,
             'description'            => $request->description,
+            'program_id'                => $request->program_id,
+            'home'                      => $request->home,
+            'fakultas_display'                      => $request->fakultas_display,
         ]);
 
         if ($organisasi) {
@@ -64,11 +73,13 @@ class OrganisasiController extends Controller
     public function edit($id)
     {
         $organisasi = Organisasi::findOrfail($id);
-        return view('admin.organisasi.edit', compact('organisasi'));
+        $kategoris = KategoriOrganisasi::all();
+        return view('admin.organisasi.edit', compact('organisasi', 'kategoris'));
     }
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'kategori_id'   => 'required',
             'title'   => 'required',
             'image'   => 'image|mimes:jpeg,jpg,png,webp|max:1000',
         ]);
@@ -89,14 +100,22 @@ class OrganisasiController extends Controller
             // Update data dengan image baru
             $organisasi->update([
                 'image'       => $image->hashName(),
+                'kategori_id'       => $request->kategori_id,
                 'title'       => $request->title,
                 'description' => $request->description,
+                'program_id'                => $request->program_id,
+                'home'                      => $request->home,
+                'fakultas_display'                      => $request->fakultas_display,
             ]);
         } else {
             // Update data tanpa mengganti image
             $organisasi->update([
+                'kategori_id'       => $request->kategori_id,
                 'title'       => $request->title,
                 'description' => $request->description,
+                'program_id'                => $request->program_id,
+                'home'                      => $request->home,
+                'fakultas_display'                      => $request->fakultas_display,
             ]);
         }
 

@@ -9,6 +9,7 @@
                     <div class="row justify-content-between">
                         <div class="col-sm-6">
                             <a href="{{ route('admin.organisasi.create') }}" class="btn btn-primary btn btn-rounded"><span class="btn-icon-left text-primary"><i class="fa-solid fa-pen-to-square"></i></span>Add Organisasi</a>
+                            <a href="{{ route('admin.kategoriOrganisasi.index') }}" class="btn btn-primary btn btn-rounded ml-5"><span class="btn-icon-left text-primary"><i class="fa-solid fa-pen-to-square"></i></span>Kategori Organisasi</a>
                         </div>
                         <div class="col-sm-6">
                             <form action="{{ route('admin.organisasi.index') }}" method="GET" class="d-flex">
@@ -50,6 +51,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    {{ $organisasis->links() }}
+                                </ul>
+                            </nav>
                 </div>
             </div>
         </div>

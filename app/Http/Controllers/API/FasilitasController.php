@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Facility;
+use App\Models\Fakultas;
 
 class FasilitasController extends Controller
 {
@@ -16,6 +17,22 @@ class FasilitasController extends Controller
     public function index()
     {
         return response()->json(Facility::where('home', 1)->get(), 200);
+    }
+
+    public function fasilitasFakultas($id)
+    {
+        $fakultas = Fakultas::with('programs')->findOrFail($id);
+
+        $programIds = $fakultas->programs->pluck('id');
+
+        $fasilitas = Facility::where('fakultas_display', 1)
+            ->whereIn('program_id', $programIds)
+            ->get();
+
+        return response()->json([
+            'message' => 'Data Berhasil Di ambil',
+            'data' => $fasilitas
+        ], 200);
     }
 
     /**

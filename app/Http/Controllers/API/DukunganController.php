@@ -15,8 +15,9 @@ class DukunganController extends Controller
      */
     public function index()
     {
-        return response()->json(Dukungan::all(), 200);
+        return response()->json(Dukungan::orderBy('created_at', 'desc')->get(), 200);
     }
+
 
     /**
      * Store a newly created resource in storage.

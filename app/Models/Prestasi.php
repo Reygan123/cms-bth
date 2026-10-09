@@ -15,7 +15,7 @@ class Prestasi extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'slug','categoriprestasi_id','program_id', 'name','home','image'
+        'title', 'slug','categoriprestasi_id','program_id', 'name','home', 'fakultas_display', 'image', 'tanggal'
     ];
 
     /**

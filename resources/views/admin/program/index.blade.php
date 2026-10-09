@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Programs'])
+@extends('layouts.app', ['title' => 'Departements'])
 
 @section('content')
 <div class="container">
@@ -9,7 +9,7 @@
                     <div class="row justify-content-between">
                         <div class="col-sm-6 mt-4">
                             <a href="{{ route('admin.program.create.halaman-pertama') }}" class="btn btn-primary btn-rounded">
-                                <span class="btn-icon-left text-primary"><i class="fa-solid fa-pen-to-square"></i></span>Add Program
+                                <span class="btn-icon-left text-primary"><i class="fa-solid fa-pen-to-square"></i></span>Add Departement
                             </a>
                         </div>
                         <div class="col-sm-6 mt-4">
@@ -37,13 +37,7 @@
                                     <td>
                                         <h5>{{ $program->name }}</h5>
                                         <div class="mt-2">
-                                            <div class="row">
-                                                <div class="col-md-3 col-sm-6"><i class="fa-solid fa-calendar-check"></i> {{ $program->age }} years old</div>
-                                                <div class="col-md-3 col-sm-6"><i class="fa-solid fa-calendar-days"></i> {{ $program->weekly }} days in a week</div>
-                                                <div class="col-md-3 col-sm-6"><i class="fa-solid fa-clock-rotate-left"></i> {{ $program->periode }} hours in a day</div>
-                                                <div class="col-md-3 col-sm-6"><i class="fa-solid fa-people-roof"></i> {{ $program->class_size }} students in a class</div>
-                                            </div>
-                                        </div>
+                                                                                    </div>
                                         <div class="flex mt-4">
                                             <a href="{{ route('admin.program.edit.halaman-pertama', $program->id) }}" class="badge badge-primary mr-2 badge-rounded">Edit</a>
                                         </div>

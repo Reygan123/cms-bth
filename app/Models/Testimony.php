@@ -15,7 +15,7 @@ class Testimony extends Model
      * @var array
      */
     protected $fillable = [
-        'name','title','slug','program_id','description','yt_link','home', 'image'
+        'name','title','slug','program_id','description','yt_link','home', 'fakultas_display', 'image'
     ];
 
 

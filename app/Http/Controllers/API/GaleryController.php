@@ -17,6 +17,11 @@ class GaleryController extends Controller
     {
         return response()->json(Portofolio::all(), 200);
     }
+    
+    public function indexHome()
+    {
+        return response()->json(Portofolio::where('home', '1')->get(), 200);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,9 +40,9 @@ class GaleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showInovasi($slug)
     {
-        //
+        return response()->json(Portofolio::where('slug', $slug)->first(), 200);
     }
 
     /**

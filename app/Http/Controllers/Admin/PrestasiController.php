@@ -17,14 +17,28 @@ class PrestasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $prestasis = Prestasi::latest()->when(request()->q, function ($prestasis) {
-            $prestasis = $prestasis->where('name', 'like', '%' . request()->q . '%');
-        })->paginate(10);
+        // Ambil semua program
+        $programs = Program::all();
 
-        return view('admin.prestasi.index', compact('prestasis'));
+        // Ambil query string dari request
+        $query = $request->q;
+        $programId = $request->program_id;
+
+        // Filter data prestasi berdasarkan pencarian nama dan program_id jika dipilih
+        $prestasis = Prestasi::latest()
+            ->when($query, function ($queryBuilder) use ($query) {
+                $queryBuilder->where('name', 'like', '%' . $query . '%');
+            })
+            ->when($programId, function ($queryBuilder) use ($programId) {
+                $queryBuilder->where('program_id', $programId);
+            })
+            ->paginate(10);
+
+        return view('admin.prestasi.index', compact('prestasis', 'programs'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -64,6 +78,8 @@ class PrestasiController extends Controller
             'program_id'                => $request->program_id,
             'name'                      => $request->name,
             'home'                      => $request->home,
+            'fakultas_display'                      => $request->fakultas_display,
+            'tanggal'                   => $request->tanggal,
         ]);
 
         if ($prestasi) {
@@ -125,6 +141,8 @@ class PrestasiController extends Controller
                 'program_id'                => $request->program_id,
                 'name'                      => $request->name,
                 'home'                      => $request->home,
+                'fakultas_display'                      => $request->fakultas_display,
+                'tanggal'                   => $request->tanggal,
 
             ]);
         } else {
@@ -146,6 +164,8 @@ class PrestasiController extends Controller
                 'program_id'                => $request->program_id,
                 'name'                      => $request->name,
                 'home'                      => $request->home,
+                'fakultas_display'                      => $request->fakultas_display,
+                'tanggal'                      => $request->tanggal,
 
             ]);
         }

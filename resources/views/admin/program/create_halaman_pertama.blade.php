@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Program'])
+@extends('layouts.app', ['title' => 'Departement'])
 
 @section('content')
 <div class="container">
@@ -36,31 +36,33 @@
                                                     </div>
                                                     @enderror
                                                 </div>
-                                                <!-- Tambahkan Checkbox untuk Memilih Fasilitas -->
                                                 <div class="form-group mb-4">
-                                                    <label class="text-label">Fasilitas</label>
-                                                    <div class="row">
-                                                        @foreach($facilities as $facility)
-                                                        <div class="col-md-6">
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="facility_ids[]"
-                                                                           value="{{ $facility->id }}">
-                                                                    {{ $facility->title }}
-                                                                </label>
+                                                        <label class="text-label mb-2" for="color">Color Code Identities</label>
+                                                        <div class="card">
+                                                            <div class="d-flex align-items-center gap-3">
+                                                                <input
+                                                                    id="color"
+                                                                    class="form-control form-control-color"
+                                                                    type="color"
+                                                                    name="color"
+                                                                    value="{{ old('color') }}"
+                                                                    oninput="document.getElementById('color-preview').textContent = this.value"
+                                                                    style="width: 60px; height: 40px; border: none; cursor: pointer;"
+                                                                >
+                                                                <span id="color-preview" class="text-sm font-mono">
+                                                                    {{ old('color', '#4197CB') }}
+                                                                </span>
                                                             </div>
                                                         </div>
-                                                    @endforeach
+
+                                                        @error('color')
+                                                            <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                                <div class="px-4 py-2">
+                                                                    <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                                </div>
+                                                            </div>
+                                                        @enderror
                                                     </div>
-                                                    @error('facility_ids')
-                                                    <div
-                                                        class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
-                                                        <div class="px-4 py-2">
-                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
-                                                        </div>
-                                                    </div>
-                                                    @enderror
-                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group mb-4">
@@ -139,6 +141,17 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
+                                                <div class="mb-4 mt-4">
+                                                    <label class="text-gray-700" for="image_head">Cover (Max Size: 750kb)</label>
+                                                    <input type="file" class="dropify" data-default-file="" id="image_head" name="image_head" />
+                                                    @error('image_head')
+                                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                        <div class="px-4 py-2">
+                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                        </div>
+                                                    </div>
+                                                    @enderror
+                                                </div>
                                                 <div class="mb-4 mt-4">
                                                     <label class="text-gray-700" for="image1">Upload Image (Max Size: 750kb)</label>
                                                     <input type="file" class="dropify" data-default-file="" id="image1" name="image1" />

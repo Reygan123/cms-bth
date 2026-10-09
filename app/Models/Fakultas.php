@@ -46,6 +46,7 @@ class Fakultas extends Model
         'link_fakultas',
         'linkedin',
         'map',
+        'color',
     ];
 
     /**

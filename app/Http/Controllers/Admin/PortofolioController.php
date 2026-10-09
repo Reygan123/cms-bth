@@ -11,14 +11,28 @@ use Illuminate\Support\Facades\Storage;
 
 class PortofolioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $portofolios = Portofolio::latest()->when(request()->q, function ($portofolios) {
-            $portofolios = $portofolios->where('title', 'like', '%' . request()->q . '%');
-        })->paginate(10);
+        // Ambil semua program untuk dropdown
+        $programs = Program::all();
 
-        return view('admin.portofolio.index', compact('portofolios'));
+        // Ambil query pencarian
+        $searchQuery = $request->query('q');
+        $selectedProgramId = $request->query('program_id');
+
+        // Ambil portofolio berdasarkan pencarian judul & filter program_id
+        $portofolios = Portofolio::latest()
+            ->when($searchQuery, function ($query) use ($searchQuery) {
+                $query->where('title', 'like', '%' . $searchQuery . '%');
+            })
+            ->when($selectedProgramId, function ($query) use ($selectedProgramId) {
+                $query->where('program_id', $selectedProgramId);
+            })
+            ->paginate(10);
+
+        return view('admin.portofolio.index', compact('portofolios', 'programs', 'selectedProgramId', 'searchQuery'));
     }
+
 
     public function create()
     {

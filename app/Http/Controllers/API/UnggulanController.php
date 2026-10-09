@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Unggulan;
+use App\Models\Fakultas;
 
 class UnggulanController extends Controller
 {
@@ -15,7 +16,7 @@ class UnggulanController extends Controller
      */
     public function index()
     {
-        return response()->json(Unggulan::where('home', 1)->get(), 200);
+        return response()->json(Unggulan::where('home', 1)->with('program')->get(), 200);
     }
 
     /**
@@ -39,6 +40,23 @@ class UnggulanController extends Controller
     {
         return response()->json(Unggulan::where('program_id', $id)->get(), 200);
     }
+    
+    public function showFakultas($id)
+    {
+        $fakultas = Fakultas::with('programs')->findOrFail($id);
+
+        $programIds = $fakultas->programs->pluck('id');
+
+        $unggulan = Unggulan::where('fakultas', 1)
+            ->whereIn('program_id', $programIds)
+            ->get();
+
+        return response()->json([
+            'message' => 'Data Berhasil Di ambil',
+            'data' => $unggulan
+        ], 200);
+    }
+
 
     /**
      * Update the specified resource in storage.

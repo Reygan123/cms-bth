@@ -14,6 +14,66 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group mb-4">
+                                            <input type="checkbox" name="home" id="home" value="1"
+                                                {{ old('home', $organisasi->home) ? 'checked' : '' }}>
+                                            <label for="home"> Display on Homepage</label>
+                                            @error('home')
+                                                <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                    <div class="px-4 py-2">
+                                                        <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                    </div>
+                                                </div>
+                                            @enderror
+                                        </div> 
+                                        <div class="form-group mb-4">
+                                            <input type="checkbox" name="fakultas_display" id="fakultas_display" value="1"
+                                                {{ old('fakultas_display', $organisasi->fakultas_display) ? 'checked' : '' }}>
+                                            <label for="fakultas_display"> Display on Fakultas</label>
+                                            @error('fakultas_display')
+                                                <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                    <div class="px-4 py-2">
+                                                        <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                    </div>
+                                                </div>
+                                            @enderror
+                                        </div> 
+                                        <div class="form-group">
+                                            <label class="text-label" for="program_id">Program Name</label>
+                                            <select class="form-control" name="program_id">
+        
+                                                @foreach ($programs as $program)
+                                                    <option class="py-1" value="{{ $program->id }}"
+                                                        @if ($organisasi->program_id == $program->id) selected @endif>{{ $program->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('program_id')
+                                                <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                    <div class="px-4 py-2">
+                                                        <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                    </div>
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="text-label" for="kategori_id">Kategori Organisasi</label>
+                                            <select class="form-control" name="kategori_id">
+        
+                                                @foreach ($kategoris as $kategori)
+                                                    <option class="py-1" value="{{ $kategori->id }}"
+                                                        @if ($organisasi->kategori_id == $kategori->id) selected @endif>{{ $kategori->title }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('kategori_id')
+                                                <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                    <div class="px-4 py-2">
+                                                        <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                    </div>
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    <div class="form-group mb-4">
                                         <label class="text-label" for="heading">Title</label>
                                         <input type="text" class="form-control" name="title"
                                             value="{{ old('description', $organisasi->title) }}">

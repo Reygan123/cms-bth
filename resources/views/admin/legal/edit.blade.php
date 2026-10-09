@@ -36,6 +36,28 @@
                                                 </div>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label class="text-label" for="file">File</label>
+                                            <input class="form-control" type="file" name="file" value="{{ old('file', $legal->file) }}" placeholder="Judul Legal">
+                                            @error('file')
+                                            <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                <div class="px-4 py-2">
+                                                    <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                </div>
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        @if($legal->file)
+                                            @if(Str::endsWith($legal->file, ['jpg', 'jpeg', 'png', 'webp']))
+                                                <img src="{{ asset('storage/files/' . $legal->file) }}" alt="File" width="200">
+                                            @else
+                                                <a href="{{ asset('storage/files/' . $legal->file) }}" target="_blank" class="btn btn-primary">
+                                                    Lihat / Download File
+                                                </a>
+                                            @endif
+                                        @endif
+
+
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-4">

@@ -54,6 +54,7 @@ class FakultasController extends Controller
             'phone'         => $request->input('phone'),
             'address'       => $request->input('address'),
             'map'           => $request->input('map'),
+            'color'           => $request->input('color'),
         ];
 
         $fakultas = Fakultas::create($fakultasData);
@@ -198,6 +199,7 @@ class FakultasController extends Controller
         $fakultas->phone = $request->input('phone');
         $fakultas->address = $request->input('address');
         $fakultas->map = $request->input('map');
+        $fakultas->color = $request->input('color');
 
         if ($fakultas->save()) {
             $fakultas->programs()->sync($request->input('program_ids'));
@@ -263,7 +265,7 @@ class FakultasController extends Controller
             $fakultas->image5 = $image5->hashName();
         }
 
-        $fakultas->title2 = $request->input('title3');
+        $fakultas->title3 = $request->input('title3');
         $fakultas->description3 = $request->input('description3');
         $fakultas->link_fakultas = $request->input('link_fakultas');
         $fakultas->linkedin = $request->input('linkedin');

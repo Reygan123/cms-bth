@@ -19,7 +19,7 @@
                                             <div class="col-sm-8">
                                                 <div class="form-group mb-4">
                                                     <label class="text-label" for="title4">Title Section 3</label>
-                                                    <input class="form-control" type="text" name="title2" value="{{ old('title3', $fakultas->title3) }}" placeholder="Title Section 3">
+                                                    <input class="form-control" type="text" name="title3" value="{{ old('title3', $fakultas->title3) }}" placeholder="Title Section 3">
                                                     @error('title3')
                                                         <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
                                                             <div class="px-4 py-2">

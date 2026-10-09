@@ -15,7 +15,7 @@ class Unggulan extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'slug', 'image','description','link','program_id','home'
+        'title', 'slug', 'image','description','link','program_id','home', 'fakultas'
     ];
 
     /**

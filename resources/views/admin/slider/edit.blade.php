@@ -106,10 +106,31 @@
                                                 @endif
                                             </div>
                                             <div class="mb-2 mt-4">
-                                                <label class="text-gray-700" for="image">Gambar (Max Size: 750kb)</label>
+                                                <label class="text-gray-700" for="image">Gambar Dekstop Slider (Max Size: 750kb)</label>
                                                 <input type="file" class="dropify" data-default-file="" id="image"
                                                     name="image" />
                                                 @error('image')
+                                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                        <div class="px-4 py-2">
+                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                        </div>
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2 mt-4">
+                                                @if ($slider->image2)
+                                                    <img src="{{ asset('storage/sliders/' . $slider->image2) }}"
+                                                        alt="{{ $slider->title }}" class="admin-edit-image">
+                                                @else
+                                                    <img src="{{ asset('storage/identities/no_image.jpg') }}"
+                                                        class="admin-edit-image">
+                                                @endif
+                                            </div>
+                                            <div class="mb-2 mt-4">
+                                                <label class="text-gray-700" for="image">Gambar Mobile Slider (Max Size: 750kb)</label>
+                                                <input type="file" class="dropify" data-default-file="" id="image"
+                                                    name="image2" />
+                                                @error('image2')
                                                     <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
                                                         <div class="px-4 py-2">
                                                             <p class="text-gray-600 text-sm">{{ $message }}</p>

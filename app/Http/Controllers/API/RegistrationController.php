@@ -15,8 +15,14 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-        return response()->json(Registration::all(), 200);
+        return response()->json(Registration::where('status', 'Aktif')->get(), 200);
     }
+    
+    public function indexSlug($slug)
+    {
+        return response()->json(Registration::where('slug', $slug)->first(), 200);
+    }
+
 
     /**
      * Store a newly created resource in storage.

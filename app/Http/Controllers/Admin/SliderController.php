@@ -19,7 +19,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $sliders = Slider::latest()->paginate(5);
+        $sliders = Slider::latest()->paginate(20);
         return view('admin.slider.index', compact('sliders'));
     }
     
@@ -45,17 +45,22 @@ class SliderController extends Controller
         $this->validate($request, [
             'title'         => 'required', 
             'image'         => 'required|image|mimes:jpeg,jpg,png,webp|max:1280',
+            'image2'         => 'required|image|mimes:jpeg,jpg,png,webp|max:1280',
         ]); 
  
         //upload image
         $image = $request->file('image');
         $image->storeAs('public/sliders', $image->hashName());
+        
+        $image2 = $request->file('image2');
+        $image2->storeAs('public/sliders', $image2->hashName());
  
         //save to DB
         $slider = Slider::create([
             'title'             => $request->title,
             'slug'              => Str::slug($request->title, '-'),
             'image'             => $image->hashName(),
+            'image2' => $image2->hashName(),
             'description'       => $request->description,
             'button'            => $request->button,
             'link'              => $request->link,
@@ -96,60 +101,50 @@ class SliderController extends Controller
     public function update(Request $request, Slider $slider)
     {
         $this->validate($request, [
-            'title'         => 'required', 
-            'image'                 => 'nullable|image|mimes:jpeg,jpg,png,webp|max:1280',
-        ]); 
+            'title'   => 'required',
+            'image'   => 'nullable|image|mimes:jpeg,jpg,png,webp|max:1280',
+            'image2'  => 'nullable|image|mimes:jpeg,jpg,png,webp|max:1280',
+        ]);
 
-        //check jika image kosong
-        if($request->file('image') == '') {
-            
-            //update data tanpa image
-            $slider = Slider::findOrFail($slider->id);
-            $slider->update([
-                'title'             => $request->title,
-                'slug'              => Str::slug($request->title, '-'),
-                'description'       => $request->description,
-                'button'            => $request->button,
-                'link'              => $request->link,
-                'align'             => $request->align,
-                'program_id'             => $request->program_id,
-                'home'             => $request->home,
-                'yt_id'             => $request->yt_id,
-            ]);
+        $data = [
+            'title'         => $request->title,
+            'slug'          => Str::slug($request->title, '-'),
+            'description'   => $request->description,
+            'button'        => $request->button,
+            'link'          => $request->link,
+            'align'         => $request->align,
+            'program_id'    => $request->program_id,
+            'home'          => $request->home,
+            'yt_id'         => $request->yt_id,
+        ];
 
-        } else {
-
-            //hapus image lama
-            Storage::disk('local')->delete('public/sliders/'.basename($slider->image));
-
-            //upload image baru
+        // handle image 1
+        if ($request->hasFile('image')) {
+            Storage::disk('local')->delete('public/sliders/' . basename($slider->image));
             $image = $request->file('image');
             $image->storeAs('public/sliders', $image->hashName());
-
-            //update dengan image baru
-            $slider = Slider::findOrFail($slider->id);
-            $slider->update([
-                'title'             => $request->title,
-                'slug'              => Str::slug($request->title, '-'),
-                'image'             => $image->hashName(),
-                'description'       => $request->description,
-                'button'            => $request->button,
-                'link'              => $request->link,
-                'align'             => $request->align,
-                'program_id'             => $request->program_id,
-                'home'             => $request->home,
-                'yt_id'             => $request->yt_id,
-            ]);
+            $data['image'] = $image->hashName();
         }
 
-        if($slider){
-            //redirect dengan pesan sukses
+        // handle image2
+        if ($request->hasFile('image2')) {
+            if ($slider->image2) {
+                Storage::disk('local')->delete('public/sliders/' . basename($slider->image2));
+            }
+            $image2 = $request->file('image2');
+            $image2->storeAs('public/sliders', $image2->hashName());
+            $data['image2'] = $image2->hashName();
+        }
+
+        $updated = $slider->update($data);
+
+        if ($updated) {
             return redirect()->route('admin.slider.index')->with(['success' => 'Data Berhasil Diupdate!']);
-        }else{
-            //redirect dengan pesan error
+        } else {
             return redirect()->route('admin.slider.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
     }
+
     
     /**
      * destroy

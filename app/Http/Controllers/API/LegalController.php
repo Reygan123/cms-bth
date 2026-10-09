@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Legal;
+use Illuminate\Support\Facades\Storage;
 
 class LegalController extends Controller
 {
@@ -15,7 +16,17 @@ class LegalController extends Controller
      */
     public function index()
     {
-        return response()->json(Legal::all(), 200);
+        $legals = Legal::all()->map(function ($legal) {
+        return [
+            'id'          => $legal->id,
+            'title'       => $legal->title,
+            'description' => $legal->description,
+            'image'       => $legal->image,
+            'file'        => $legal->file ? Storage::url('identities/'.$legal->file) : null,
+        ];
+    });
+
+    return response()->json($legals, 200);
     }
 
     /**

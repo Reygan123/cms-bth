@@ -97,11 +97,24 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="mb-2 mt-4">
-                                                <label class="text-gray-700" for="image">Upload Image (Max Size:
+                                                <label class="text-gray-700" for="image">Image For Dekstop (Max Size:
                                                     750kb)</label>
                                                 <input type="file" class="dropify" data-default-file="" id="image"
                                                     name="image" />
                                                 @error('image')
+                                                    <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
+                                                        <div class="px-4 py-2">
+                                                            <p class="text-gray-600 text-sm">{{ $message }}</p>
+                                                        </div>
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2 mt-4">
+                                                <label class="text-gray-700" for="image">Image For Mobile (Max Size:
+                                                    750kb)</label>
+                                                <input type="file" class="dropify" data-default-file="" id="image"
+                                                    name="image2" />
+                                                @error('image2')
                                                     <div class="w-full bg-red-200 shadow-sm rounded-md overflow-hidden mt-2">
                                                         <div class="px-4 py-2">
                                                             <p class="text-gray-600 text-sm">{{ $message }}</p>
