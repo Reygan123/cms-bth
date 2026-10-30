@@ -275,3 +275,17 @@ Route::prefix('admin')->group(function () {
         Route::resource('/ganalytics', GanalyticsController::class, ['as' => 'admin']);
     });
 });
+
+// Fallback untuk melayani file storage jika symlink public/storage di server belum dibuat/bermasalah
+Route::get('/storage/{path}', function ($path) {
+    $filePath = storage_path('app/public/' . $path);
+    if (!file_exists($filePath)) {
+        $altPath = storage_path('app/public/public/' . $path);
+        if (file_exists($altPath)) {
+            $filePath = $altPath;
+        } else {
+            abort(404);
+        }
+    }
+    return response()->file($filePath);
+})->where('path', '.*');

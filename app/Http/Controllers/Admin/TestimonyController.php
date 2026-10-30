@@ -70,10 +70,12 @@ class TestimonyController extends Controller
         //upload image
         $image = $request->file('image');
         $image->storeAs('public/testimonies', $image->hashName());
+        $image->storeAs('testimonials', $image->hashName(), 'public');
+        $image->storeAs('testimonies', $image->hashName(), 'public');
 
         //save to DB
         $testimony = Testimony::create([
-            'image'             => $image->hashName(),
+            'image'             => 'testimonials/' . $image->hashName(),
             'name'              => $request->name,
             'title'              => $request->title,
             'slug'              => Str::slug($request->name, '-'),
@@ -144,15 +146,21 @@ class TestimonyController extends Controller
 
             //hapus image lama
             Storage::disk('local')->delete('public/testimonies/' . basename($testimony->image));
+        Storage::disk('public')->delete('testimonials/' . basename($testimony->image));
+        Storage::disk('public')->delete('testimonies/' . basename($testimony->image));
+            Storage::disk('public')->delete('testimonials/' . basename($testimony->image));
+            Storage::disk('public')->delete('testimonies/' . basename($testimony->image));
 
             //upload image baru
             $image = $request->file('image');
             $image->storeAs('public/testimonies', $image->hashName());
+        $image->storeAs('testimonials', $image->hashName(), 'public');
+        $image->storeAs('testimonies', $image->hashName(), 'public');
 
             //update dengan image baru
             $testimony = Testimony::findOrFail($testimony->id);
             $testimony->update([
-                'image'             => $image->hashName(),
+                'image'             => 'testimonials/' . $image->hashName(),
                 'name'              => $request->name,
                 'title'              => $request->title,
                 'slug'               => Str::slug($request->name, '-'),
@@ -185,6 +193,8 @@ class TestimonyController extends Controller
     {
         $testimony = Testimony::findOrFail($id);
         Storage::disk('local')->delete('public/testimonies/' . basename($testimony->image));
+        Storage::disk('public')->delete('testimonials/' . basename($testimony->image));
+        Storage::disk('public')->delete('testimonies/' . basename($testimony->image));
         $testimony->delete();
 
         if ($testimony) {
