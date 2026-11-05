@@ -111,7 +111,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-2 mt-4">
                                             @if($prestasi->image)
-                                            <img src="{{ asset('storage/prestasis/' . $prestasi->image) }}" alt="{{$prestasi->title}}" class="admin-edit-image">
+                                            <img src="{{ asset(Str::startsWith($prestasi->image, ['http://', 'https://']) ? $prestasi->image : (Str::startsWith($prestasi->image, 'storage/') ? $prestasi->image : (Str::startsWith($prestasi->image, ['achievements/', 'prestasis/']) ? 'storage/' . $prestasi->image : 'storage/prestasis/' . $prestasi->image))) }}" alt="{{$prestasi->title}}" class="admin-edit-image">
                                             @else
                                             <img src="{{ asset('storage/identities/no_image.jpg') }}" class="admin-edit-image">
                                             @endif

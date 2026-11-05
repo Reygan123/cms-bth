@@ -52,10 +52,10 @@
     <div id="main-wrapper">
         <div class="nav-header">
             <a href="<?php echo e(route('admin.dashboard.index')); ?>" class="brand-logo">
-                <span class="logo-abbr"><?php echo e(asset('storage/identities/' . $identities[0]->favicon)); ?></span>
-                <span class="logo-compact"><img src="<?php echo e(asset('storage/identities/' .$identities[0]->logo)); ?>"
+                <span class="logo-abbr"><img src="<?php echo e((!empty($identities[0]->favicon)) ? asset('storage/identities/' . $identities[0]->favicon) : asset('admin/images/favicon.png')); ?>" alt="<?php echo e($identities[0]->name ?? 'STIKes'); ?>" class="logo" style="max-height: 35px;"></span>
+                <span class="logo-compact"><img src="<?php echo e((!empty($identities[0]->logo)) ? asset('storage/identities/' . $identities[0]->logo) : asset('admin/images/logo.png')); ?>"
                         alt="<?php echo e($identities[0]->name); ?>" class="logo"></span>
-                <span class="brand-title"><img src="<?php echo e(asset('storage/identities/' .$identities[0]->logo)); ?>"
+                <span class="brand-title"><img src="<?php echo e((!empty($identities[0]->logo)) ? asset('storage/identities/' . $identities[0]->logo) : asset('admin/images/logo.png')); ?>"
                         alt="<?php echo e($identities[0]->name); ?>"></span>
             </a>
 

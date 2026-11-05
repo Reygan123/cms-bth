@@ -67,7 +67,12 @@ class PrestasiController extends Controller
 
         //upload image
         $image = $request->file('image');
-        $image->storeAs('public/prestasis', $image->hashName());
+        $stored = $image->storeAs('public/prestasis', $image->hashName());
+        $image->storeAs('prestasis', $image->hashName(), 'public');
+
+        if (!$stored) {
+            return back()->withErrors(['image' => 'Gagal menyimpan file gambar ke storage. Periksa permission folder di server.'])->withInput();
+        }
 
         //save to DB
         $prestasi = Prestasi::create([
@@ -152,7 +157,12 @@ class PrestasiController extends Controller
 
             //upload image baru
             $image = $request->file('image');
-            $image->storeAs('public/prestasis', $image->hashName());
+            $stored = $image->storeAs('public/prestasis', $image->hashName());
+        $image->storeAs('prestasis', $image->hashName(), 'public');
+
+        if (!$stored) {
+            return back()->withErrors(['image' => 'Gagal menyimpan file gambar ke storage. Periksa permission folder di server.'])->withInput();
+        }
 
             //update dengan image baru
             $prestasi = Prestasi::findOrFail($prestasi->id);

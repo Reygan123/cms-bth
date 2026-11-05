@@ -49,8 +49,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                @if ($post->image && file_exists(public_path('storage/posts/' . $post->image)))
-                                                    <img src="{{ asset('storage/posts/' . $post->image) }}"
+                                                @if ($post->image && ($post->image && (file_exists(public_path('storage/' . $post->image)) || file_exists(public_path('storage/posts/' . $post->image)) || file_exists(public_path('storage/post-image/' . $post->image)))))
+                                                    <img src="{{ asset(Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : (Str::startsWith($post->image, 'storage/') ? $post->image : (Str::startsWith($post->image, ['post-image/', 'posts/']) ? 'storage/' . $post->image : 'storage/post-image/' . $post->image))) }}"
                                                         alt="{{ $post->title }}" class="admin-index-image">
                                                 @else
                                                     <img src="{{ asset('storage/identities/no_image.jpg') }}"

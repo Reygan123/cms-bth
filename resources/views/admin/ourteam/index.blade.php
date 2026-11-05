@@ -54,7 +54,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <img src="{{asset('storage/ourteams/'.$ourteam->image)}}" class="admin-index-image">
+                                        <img src="{{ asset(Str::startsWith($ourteam->image, ['http://', 'https://']) ? $ourteam->image : (Str::startsWith($ourteam->image, 'storage/') ? $ourteam->image : (Str::startsWith($ourteam->image, ['ourteam-image/', 'ourteams/']) ? 'storage/' . $ourteam->image : 'storage/ourteams/' . $ourteam->image))) }}" onerror="this.onerror=null;this.src='{{ asset('admin/images/default-avatar.svg') }}';" class="admin-index-image">
                                     </td>
                                 </tr>
                                 @empty

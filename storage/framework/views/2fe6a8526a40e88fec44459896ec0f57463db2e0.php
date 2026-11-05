@@ -141,8 +141,8 @@ unset($__errorArgs, $__bag); ?>
                                         <div class="col-md-4">
                                             <div class="mb-2 mt-4">
                                                 <?php if($testimony->image): ?>
-                                                    <img src="<?php echo e(asset('storage/testimonies/' . $testimony->image)); ?>"
-                                                        alt="<?php echo e($testimony->name); ?>" class="admin-edit-image">
+                                                    <img src="<?php echo e(asset(Str::startsWith($testimony->image, ['http://', 'https://']) ? $testimony->image : (Str::startsWith($testimony->image, 'storage/') ? $testimony->image : (Str::startsWith($testimony->image, ['testimonials/', 'testimonies/']) ? 'storage/' . $testimony->image : 'storage/testimonies/' . $testimony->image)))); ?>"
+                                                        alt="<?php echo e($testimony->name); ?>" onerror="this.onerror=null;this.src='<?php echo e(asset('admin/images/default-avatar.svg')); ?>';" class="admin-edit-image">
                                                 <?php else: ?>
                                                     <img src="<?php echo e(asset('storage/identities/no_image.jpg')); ?>"
                                                         class="admin-edit-image">

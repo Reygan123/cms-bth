@@ -83,7 +83,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <img src="<?php echo e(asset('storage/testimonies/'.$t->image)); ?>" class="admin-index-image">
+                                        <img src="<?php echo e(asset(Str::startsWith($t->image, ['http://', 'https://']) ? $t->image : (Str::startsWith($t->image, 'storage/') ? $t->image : (Str::startsWith($t->image, ['testimonials/', 'testimonies/']) ? 'storage/' . $t->image : 'storage/testimonies/' . $t->image)))); ?>" onerror="this.onerror=null;this.src='<?php echo e(asset('admin/images/default-avatar.svg')); ?>';" class="admin-index-image">
                                     </td>
                                 </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

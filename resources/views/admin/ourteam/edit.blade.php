@@ -146,8 +146,8 @@
                                         <div class="col-sm-6">
                                             <div class="mb-2 mt-4">
                                                 @if ($ourteam->image)
-                                                    <img src="{{ asset('storage/ourteams/' . $ourteam->image) }}"
-                                                        alt="{{ $ourteam->title }}" class="admin-edit-image">
+                                                    <img src="{{ asset(Str::startsWith($ourteam->image, ['http://', 'https://']) ? $ourteam->image : (Str::startsWith($ourteam->image, 'storage/') ? $ourteam->image : (Str::startsWith($ourteam->image, ['ourteam-image/', 'ourteams/']) ? 'storage/' . $ourteam->image : 'storage/ourteams/' . $ourteam->image))) }}"
+                                                        alt="{{ $ourteam->title }}" onerror="this.onerror=null;this.src='{{ asset('admin/images/default-avatar.svg') }}';" class="admin-edit-image">
                                                 @else
                                                     <img src="{{ asset('storage/identities/no_image.jpg') }}"
                                                         class="admin-edit-image">

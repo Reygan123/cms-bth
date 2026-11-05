@@ -73,7 +73,7 @@
                                             </td>
                                             <td>
                                                 @if ($facility->image && file_exists(public_path('storage/facilities/' . $facility->image)))
-                                                    <img src="{{ asset('storage/facilities/' . $facility->image) }}"
+                                                    <img src="{{ asset(Str::startsWith($facility->image, ['http://', 'https://']) ? $facility->image : (Str::startsWith($facility->image, 'storage/') ? $facility->image : 'storage/' . ltrim($facility->image, '/'))) }}"
                                                         alt="{{ $facility->title }}" class="admin-index-image">
                                                 @else
                                                     <img src="{{ asset('storage/identities/no_image.jpg') }}"

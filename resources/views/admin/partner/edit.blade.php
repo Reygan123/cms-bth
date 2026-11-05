@@ -65,7 +65,7 @@
                                         <div class="col-md-4">
                                             <div class="mb-2 mt-4">
                                                 @if ($partner->image)
-                                                    <img src="{{ asset('storage/partners/' . $partner->image) }}"
+                                                    <img src="{{ asset(Str::startsWith($partner->image, ['http://', 'https://']) ? $partner->image : (Str::startsWith($partner->image, 'storage/') ? $partner->image : (Str::startsWith($partner->image, ['partner-image/', 'partners/']) ? 'storage/' . $partner->image : 'storage/partner-image/' . $partner->image))) }}"
                                                         alt="{{ $partner->title }}" class="admin-edit-image">
                                                 @else
                                                     <img src="{{ asset('storage/identities/no_image.jpg') }}"

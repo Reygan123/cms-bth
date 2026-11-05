@@ -100,7 +100,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             @if ($post->image && file_exists(public_path('storage/posts/' . $post->image)))
-                                                    <img src="{{ asset('storage/posts/' . $post->image) }}"
+                                                    <img src="{{ asset(Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : (Str::startsWith($post->image, 'storage/') ? $post->image : (Str::startsWith($post->image, ['post-image/', 'posts/']) ? 'storage/' . $post->image : 'storage/post-image/' . $post->image))) }}"
                                                         alt="{{ $post->title }}" class="admin-edit-image">
                                                 @else
                                                     <img src="{{ asset('storage/identities/no_image.jpg') }}"

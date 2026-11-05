@@ -4872,3 +4872,53 @@
 #11 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #12 {main}
 "} 
+[2026-11-05 16:34:09] local.ERROR: Undefined variable $identities (View: C:\Project\pmb-unpas\STIKES PMB\cms-bth\resources\views\layouts\app.blade.php) (View: C:\Project\pmb-unpas\STIKES PMB\cms-bth\resources\views\layouts\app.blade.php) {"exception":"[object] (Illuminate\\View\\ViewException(code: 0): Undefined variable $identities (View: C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\resources\\views\\layouts\\app.blade.php) (View: C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\resources\\views\\layouts\\app.blade.php) at C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\storage\\framework\\views\\d52a401babe2cd15957e0f58ca05117a81e27d29.php:8)
+[stacktrace]
+#0 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(60): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(Illuminate\\View\\ViewException), 0)
+#1 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Project\\\\pmb-...', Array)
+#2 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Project\\\\pmb-...', Array)
+#3 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#4 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#5 C:\\Users\\Reygan Fadhilah\\.gemini\\antigravity\\brain\\824b4dc2-a6a2-4816-b20e-3e5bd8577edb\\scratch\\render_ourteam_view.php(10): Illuminate\\View\\View->render()
+#6 {main}
+
+[previous exception] [object] (Illuminate\\View\\ViewException(code: 0): Undefined variable $identities (View: C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\resources\\views\\layouts\\app.blade.php) at C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\storage\\framework\\views\\d52a401babe2cd15957e0f58ca05117a81e27d29.php:8)
+[stacktrace]
+#0 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(60): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 1)
+#1 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Project\\\\pmb-...', Array)
+#2 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Project\\\\pmb-...', Array)
+#3 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#4 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#5 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\storage\\framework\\views\\4c3e958a4cccc4a2539586e5bc96edff7e029ce2.php(134): Illuminate\\View\\View->render()
+#6 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\Project\\\\pmb-...')
+#7 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#8 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\Project\\\\pmb-...', Array)
+#9 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Project\\\\pmb-...', Array)
+#10 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Project\\\\pmb-...', Array)
+#11 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#12 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#13 C:\\Users\\Reygan Fadhilah\\.gemini\\antigravity\\brain\\824b4dc2-a6a2-4816-b20e-3e5bd8577edb\\scratch\\render_ourteam_view.php(10): Illuminate\\View\\View->render()
+#14 {main}
+
+[previous exception] [object] (ErrorException(code: 0): Undefined variable $identities at C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\storage\\framework\\views\\d52a401babe2cd15957e0f58ca05117a81e27d29.php:8)
+[stacktrace]
+#0 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(272): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined varia...', 'C:\\\\Project\\\\pmb-...', 8)
+#1 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\storage\\framework\\views\\d52a401babe2cd15957e0f58ca05117a81e27d29.php(8): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'Undefined varia...', 'C:\\\\Project\\\\pmb-...', 8)
+#2 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\Project\\\\pmb-...')
+#3 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\Project\\\\pmb-...', Array)
+#5 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Project\\\\pmb-...', Array)
+#6 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Project\\\\pmb-...', Array)
+#7 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#8 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#9 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\storage\\framework\\views\\4c3e958a4cccc4a2539586e5bc96edff7e029ce2.php(134): Illuminate\\View\\View->render()
+#10 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\Project\\\\pmb-...')
+#11 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#12 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\Project\\\\pmb-...', Array)
+#13 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Project\\\\pmb-...', Array)
+#14 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Project\\\\pmb-...', Array)
+#15 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#16 C:\\Project\\pmb-unpas\\STIKES PMB\\cms-bth\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#17 C:\\Users\\Reygan Fadhilah\\.gemini\\antigravity\\brain\\824b4dc2-a6a2-4816-b20e-3e5bd8577edb\\scratch\\render_ourteam_view.php(10): Illuminate\\View\\View->render()
+#18 {main}
+"} 

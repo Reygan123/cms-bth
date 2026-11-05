@@ -82,7 +82,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <img src="{{asset('storage/testimonies/'.$t->image)}}" class="admin-index-image">
+                                        <img src="{{ asset(Str::startsWith($t->image, ['http://', 'https://']) ? $t->image : (Str::startsWith($t->image, 'storage/') ? $t->image : (Str::startsWith($t->image, ['testimonials/', 'testimonies/']) ? 'storage/' . $t->image : 'storage/testimonies/' . $t->image))) }}" onerror="this.onerror=null;this.src='{{ asset('admin/images/default-avatar.svg') }}';" class="admin-index-image">
                                     </td>
                                 </tr>
                                 @empty

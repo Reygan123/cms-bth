@@ -52,10 +52,10 @@
     <div id="main-wrapper">
         <div class="nav-header">
             <a href="{{ route('admin.dashboard.index') }}" class="brand-logo">
-                <span class="logo-abbr">{{ asset('storage/identities/' . $identities[0]->favicon) }}</span>
-                <span class="logo-compact"><img src="{{ asset('storage/identities/' .$identities[0]->logo) }}"
+                <span class="logo-abbr"><img src="{{ (!empty($identities[0]->favicon)) ? asset('storage/identities/' . $identities[0]->favicon) : asset('admin/images/favicon.png') }}" alt="{{ $identities[0]->name ?? 'STIKes' }}" class="logo" style="max-height: 35px;"></span>
+                <span class="logo-compact"><img src="{{ (!empty($identities[0]->logo)) ? asset('storage/identities/' . $identities[0]->logo) : asset('admin/images/logo.png') }}"
                         alt="{{ $identities[0]->name }}" class="logo"></span>
-                <span class="brand-title"><img src="{{ asset('storage/identities/' .$identities[0]->logo) }}"
+                <span class="brand-title"><img src="{{ (!empty($identities[0]->logo)) ? asset('storage/identities/' . $identities[0]->logo) : asset('admin/images/logo.png') }}"
                         alt="{{ $identities[0]->name }}"></span>
             </a>
 

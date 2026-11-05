@@ -98,8 +98,8 @@
                                         <div class="col-md-4">
                                             <div class="mb-2 mt-4">
                                                 @if ($testimony->image)
-                                                    <img src="{{ asset('storage/testimonies/' . $testimony->image) }}"
-                                                        alt="{{ $testimony->name }}" class="admin-edit-image">
+                                                    <img src="{{ asset(Str::startsWith($testimony->image, ['http://', 'https://']) ? $testimony->image : (Str::startsWith($testimony->image, 'storage/') ? $testimony->image : (Str::startsWith($testimony->image, ['testimonials/', 'testimonies/']) ? 'storage/' . $testimony->image : 'storage/testimonies/' . $testimony->image))) }}"
+                                                        alt="{{ $testimony->name }}" onerror="this.onerror=null;this.src='{{ asset('admin/images/default-avatar.svg') }}';" class="admin-edit-image">
                                                 @else
                                                     <img src="{{ asset('storage/identities/no_image.jpg') }}"
                                                         class="admin-edit-image">

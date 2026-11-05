@@ -278,14 +278,101 @@ Route::prefix('admin')->group(function () {
 
 // Fallback untuk melayani file storage jika symlink public/storage di server belum dibuat/bermasalah
 Route::get('/storage/{path}', function ($path) {
-    $filePath = storage_path('app/public/' . $path);
-    if (!file_exists($filePath)) {
-        $altPath = storage_path('app/public/public/' . $path);
-        if (file_exists($altPath)) {
-            $filePath = $altPath;
-        } else {
-            abort(404);
+    $clean = trim($path);
+    $clean = preg_replace('#^/?storage/#', '', $clean);
+    $clean = ltrim($clean, '/');
+
+    $knownFolders = [
+        'facilities', 'organisasis', 'organisasi', 'achievements', 'prestasis',
+        'partner-image', 'partners', 'testimonials', 'testimonies', 'agenda-image',
+        'agendas', 'post-image', 'posts', 'faculty-image', 'fakultas-image',
+        'departement-image', 'departements', 'programs', 'sliders', 'identities',
+        'sideBanner-image', 'beasiswa-images', 'identity-image', 'legalDocument-image',
+        'ourteam-image', 'ourteams', 'supports', 'timeline', 'timeline-image',
+        'usps', 'ekosistem-images', 'category-image', 'categories', 'jurnal-images',
+        'files', 'pengumuman-files', 'unggulans', 'benefits', 'catatans', 'ekskuls', 'seragams', 'stories', 'socials'
+    ];
+
+    // Deteksi dan bersihkan folder bertumpuk (seperti partners/partner-image/... atau posts/post-image/...)
+    foreach ($knownFolders as $folder) {
+        $marker = $folder . '/';
+        $pos = strrpos($clean, $marker);
+        if ($pos !== false) {
+            $clean = substr($clean, $pos);
+            break;
         }
     }
-    return response()->file($filePath);
+
+    // Normalisasi alias folder
+    if (str_starts_with($clean, 'testimonies/')) {
+        $clean = 'testimonials/' . substr($clean, 12);
+    } elseif (str_starts_with($clean, 'posts/')) {
+        $clean = 'post-image/' . substr($clean, 6);
+    } elseif (str_starts_with($clean, 'agendas/')) {
+        $clean = 'agenda-image/' . substr($clean, 8);
+    } elseif (str_starts_with($clean, 'partners/')) {
+        $clean = 'partner-image/' . substr($clean, 9);
+    } elseif (str_starts_with($clean, 'ourteams/')) {
+        $clean = 'ourteam-image/' . substr($clean, 9);
+    } elseif (str_starts_with($clean, 'organisasi/')) {
+        $clean = 'organisasis/' . substr($clean, 11);
+    }
+
+    // Daftar lokasi pencarian file di storage
+    $candidates = [
+        storage_path('app/public/' . $clean),
+        storage_path('app/public/public/' . $clean),
+        public_path('storage/' . $clean),
+    ];
+
+    if (str_starts_with($clean, 'achievements/')) {
+        $candidates[] = storage_path('app/public/prestasis/' . substr($clean, 13));
+        $candidates[] = public_path('storage/prestasis/' . substr($clean, 13));
+    } elseif (str_starts_with($clean, 'prestasis/')) {
+        $candidates[] = storage_path('app/public/achievements/' . substr($clean, 10));
+        $candidates[] = public_path('storage/achievements/' . substr($clean, 10));
+    }
+
+    if (str_starts_with($clean, 'facilities/')) {
+        $trimmed = preg_replace('#^facilities/+#', 'facilities/', $clean);
+        $candidates[] = storage_path('app/public/' . $trimmed);
+    }
+
+    foreach ($candidates as $file) {
+        if (file_exists($file) && !is_dir($file)) {
+            return response()->file($file, [
+                'Cache-Control' => 'public, max-age=86400',
+            ]);
+        }
+    }
+
+    // Jika file fisik tidak ditemukan (misal data foto dosen/testimoni lama), return avatar/placeholder default
+    $lower = strtolower($clean);
+    if (str_contains($lower, 'ourteam') || str_contains($lower, 'dosen') || str_contains($lower, 'testimoni') || str_contains($lower, 'avatar')) {
+        $avatarPath = public_path('admin/images/default-avatar.svg');
+        if (file_exists($avatarPath)) {
+            return response()->file($avatarPath, [
+                'Content-Type' => 'image/svg+xml',
+                'Cache-Control' => 'public, max-age=86400',
+            ]);
+        }
+    }
+
+    $noImagePath = public_path('admin/images/no_image.png');
+    if (file_exists($noImagePath)) {
+        return response()->file($noImagePath, [
+            'Content-Type' => 'image/png',
+            'Cache-Control' => 'public, max-age=86400',
+        ]);
+    }
+
+    $fallbackSvg = public_path('admin/images/default-avatar.svg');
+    if (file_exists($fallbackSvg)) {
+        return response()->file($fallbackSvg, [
+            'Content-Type' => 'image/svg+xml',
+            'Cache-Control' => 'public, max-age=86400',
+        ]);
+    }
+
+    abort(404);
 })->where('path', '.*');

@@ -39,7 +39,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <img src="{{asset('storage/partners/'.$partner->image)}}" class="admin-index-image">
+                                        <img src="{{ asset(Str::startsWith($partner->image, ['http://', 'https://']) ? $partner->image : (Str::startsWith($partner->image, 'storage/') ? $partner->image : (Str::startsWith($partner->image, ['partner-image/', 'partners/']) ? 'storage/' . $partner->image : 'storage/partner-image/' . $partner->image))) }}" class="admin-index-image">
                                     </td>
                                 </tr>
                                 @empty

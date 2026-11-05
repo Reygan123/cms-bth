@@ -42,8 +42,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @if ($agenda->image && file_exists(public_path('storage/agendas/' . $agenda->image)))
-                                                    <img src="{{ asset('storage/agendas/' . $agenda->image) }}"
+                                        @if ($agenda->image && ($agenda->image && (file_exists(public_path('storage/' . $agenda->image)) || file_exists(public_path('storage/agendas/' . $agenda->image)) || file_exists(public_path('storage/agenda-image/' . $agenda->image)))))
+                                                    <img src="{{ asset(Str::startsWith($agenda->image, ['http://', 'https://']) ? $agenda->image : (Str::startsWith($agenda->image, 'storage/') ? $agenda->image : (Str::startsWith($agenda->image, ['agenda-image/', 'agendas/']) ? 'storage/' . $agenda->image : 'storage/agenda-image/' . $agenda->image))) }}"
                                                         alt="{{ $agenda->title }}" class="admin-index-image">
                                                 @else
                                                     <img src="{{ asset('storage/identities/no_image.jpg') }}"
