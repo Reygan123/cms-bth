@@ -44,7 +44,7 @@ class SyncFromStikesWebsiteSeeder extends Seeder
                     'address'     => strip_tags(($identity['adress'] ?? null) ?: 'Jl. Kerkof No. 243 Leuwigajah, Cimahi 40532, Jawa Barat'),
                     'gmap'        => ($identity['link_map'] ?? null) ?: ($univ['map'] ?? null),
                     'phone'       => ($identity['phone'] ?? null) ?: '(022) 667 4696',
-                    'email'       => ($identity['email'] ?? null) ?: 'pmb@stikesbudiluhurcimahi.ac.id',
+                    'email'       => ($identity['email'] ?? null) ?: 'info@stikesbudiluhurcimahi.ac.id',
                     'fb'          => ($identity['fb'] ?? null) ?: 'https://www.facebook.com/STIKes-BUDI-LUHUR-CIMAHI-133049098766/',
                     'ig'          => ($identity['ig'] ?? null) ?: 'https://www.instagram.com/stikesbudiluhurcimahi/',
                     'tt'          => ($identity['tiktok'] ?? null) ?: '@universitas.budiluhur',
